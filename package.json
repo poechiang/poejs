@@ -1,0 +1,29 @@
+{
+  "name": "poe",
+  "version": "2.0.1",
+  "description": "a library for javascript ",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/poechiang/poe.git"
+  },
+  "keywords": [
+    "poejs",
+    "poe",
+    "js",
+    "web"
+  ],
+  "author": "poe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/poechiang/poe/issues"
+  },
+  "homepage": "https://github.com/poechiang/poe#readme"
+}
