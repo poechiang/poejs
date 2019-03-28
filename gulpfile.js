@@ -12,32 +12,8 @@ var pkg = JSON.parse(require('fs').readFileSync('./package.json')),
 	browserSync = require('browser-sync').create(),
 	reload = browserSync.reload
 
-
-
-
-
-
-
-// 静态服务器
-gulp.task('default', ['rjs','scss'],function() {
-	browserSync.exit()
-    browserSync.init({
-        server: {
-            baseDir: './',
-            index:'test/index.html'
-        },
-        port:1080
-    })
-
-    gulp.watch('gulpfile.js', ['default'])
-    gulp.watch(['src/**/*.js','src/wrapper/*.frag'], ['rjs'])
-    gulp.watch('src/scss/**/*.scss', ['scss'])
-    gulp.watch('test/**/*.html').on('change', reload)
-})
-
-
-
-gulp.task('rjs', function() {
+let port = 8080
+let script = () => {
 	var outFile = './build/'+pkg.name+'.'+pkg.version+'.js'
 	rjs.optimize({
 	    findNestedDependencies: false,
@@ -57,23 +33,18 @@ gulp.task('rjs', function() {
 	 
 	      fs.writeFileSync(outputFile, amdclean.clean({
 	        'filePath': outputFile,
-	      //   wrap:{
-		    	// start:'',
-		    	// end:''
-	      //   },
 	        transformAMDChecks:true
 	      }));
 	    }
   	})  
-	gulp.src(outFile)
+	return gulp.src(outFile)
 		.pipe(rename({suffix:'.min'})) 
 		.pipe(uglify())              
 		.pipe(gulp.dest('build')) 
 		.pipe(reload({stream: true}))   
-})
-
-gulp.task('scss', function() {
-	gulp.src(['./src/scss/poe.scss'])
+}
+let style = () =>{
+	return gulp.src(['./src/scss/poe.scss'])
 		.pipe(scss())
 		.pipe(concat(pkg.name+'.'+pkg.version+'.css'))
 		.pipe(gulp.dest('./build'))
@@ -83,4 +54,26 @@ gulp.task('scss', function() {
 		.pipe(cleanCss())              
 		.pipe(gulp.dest('build')) 
 		.pipe(reload({stream: true}))     
-})
+}
+let restart = () => {
+	browserSync.exit()
+	def()
+}
+let def =()=>{
+    browserSync.init({
+        server: {
+            baseDir: './',
+            index:'test/index.html'
+        },
+        port:port
+    })
+
+    gulp.watch('gulpfile.js', restart)
+    gulp.watch(['src/**/*.js','src/wrapper/*.frag'], script)
+    gulp.watch('src/**/*.scss', style)
+    gulp.watch('test/**/*.html').on('change', reload)
+}
+
+gulp.task('script',script)
+gulp.task('style',style)
+gulp.task('default', gulp.series('script','style', def))
