@@ -4,7 +4,17 @@
   "description": "a library for javascript ",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "^4.0.0"
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-amdclean": "^1.1.1",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-filter": "^5.1.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-scss": "^1.4.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webpack": "^1.5.0",
+    "requirejs": "^2.3.6"
   },
   "devDependencies": {},
   "scripts": {

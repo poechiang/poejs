@@ -15,6 +15,9 @@ var pkg = JSON.parse(require('fs').readFileSync('./package.json')),
 
 
 
+
+
+
 // 静态服务器
 gulp.task('default', ['rjs','scss'],function() {
 	browserSync.exit()
