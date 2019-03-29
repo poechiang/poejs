@@ -1,35 +1,27 @@
-define( [
+define([
 	"../core"
-], function( POE, noGlobal ) {
+], function(POE, noGlobal) {
 
-"use strict";
+	"use strict";
 
-var
+	var _POE = window.POE,
+		_$$ = window.$$;
 
-	// Map over POE in case of overwrite
-	_POE = window.POE,
+	POE.noConflict = function(deep) {
+		if (window.$$ === POE) {
+			window.$$ = _$$;
+		}
 
-	// Map over the $$ in case of overwrite
-	_$$ = window.$$;
+		if (deep && window.POE === POE) {
+			window.POE = _POE;
+		}
 
-POE.noConflict = function( deep ) {
-	if ( window.$$ === POE ) {
-		window.$$ = _$$;
+		return POE;
 	}
 
-	if ( deep && window.POE === POE ) {
-		window.POE = _POE;
+	if (!noGlobal) {
+		POE.global = window
+		window.POE = window.$$ = POE;
 	}
 
-	return POE;
-};
-
-// Expose POE and $$ identifiers, even in AMD
-// (#7102#comment:10, https://github.com/poe/poe/pull/557)
-// and CommonJS for browser emulators (#13566)
-if ( !noGlobal ) {
-	POE.global = window
-	window.POE = window.$$ = POE;
-}
-
-} );
+})
