@@ -12,28 +12,30 @@ var pkg = JSON.parse(require('fs').readFileSync('./package.json')),
 	browserSync = require('browser-sync').create(),
 	reload = browserSync.reload
 
+
 let port = 8080
-let script = () => {
+let script = function() {
 	var outFile = './build/' + pkg.name + '.' + pkg.version + '.js'
 	rjs.optimize({
 		findNestedDependencies: false,
 		baseUrl: './src/',
 		optimize: 'none',
 		out: outFile,
-		wrap: {
-			startFile: ['./src/wrapper/start.frag'],
-			endFile: ['./src/wrapper/end.frag'],
-		},
+		// wrap: {
+		// 	startFile: './src/wrapper/start.frag',
+		// 	endFile: './src/wrapper/end.frag',
+		// },
 		name: 'poe',
 		onModuleBundleComplete: function(data) {
 			var fs = require('fs'),
 				amdclean = require('amdclean'),
-				outputFile = data.path;
+				outputFile = data.path
 
 			fs.writeFileSync(outputFile, amdclean.clean({
 				'filePath': outputFile,
 				transformAMDChecks: true
-			}));
+			}))
+
 		}
 	})
 	return gulp.src(outFile)
@@ -46,7 +48,7 @@ let script = () => {
 			stream: true
 		}))
 }
-let style = () => {
+let style = function(){
 	return gulp.src(['./src/scss/poe.scss'])
 		.pipe(scss())
 		.pipe(concat(pkg.name + '.' + pkg.version + '.css'))
@@ -65,7 +67,7 @@ let style = () => {
 		}))
 }
 
-let def = () => {
+let def = function() {
 	browserSync.init({
 		server: {
 			baseDir: './',

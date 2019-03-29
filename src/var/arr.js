@@ -1,6 +1,0 @@
-define(() => {
-
-	'use strict'
-
-	return []
-})
