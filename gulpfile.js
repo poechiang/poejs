@@ -21,10 +21,10 @@ let script = function() {
 		baseUrl: './src/',
 		optimize: 'none',
 		out: outFile,
-		// wrap: {
-		// 	startFile: './src/wrapper/start.frag',
-		// 	endFile: './src/wrapper/end.frag',
-		// },
+		wrap: {
+			startFile: './src/wrapper/start.frag',
+			endFile: './src/wrapper/end.frag',
+		},
 		name: 'poe',
 		onModuleBundleComplete: function(data) {
 			var fs = require('fs'),

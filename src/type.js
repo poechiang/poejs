@@ -3,19 +3,14 @@ define([
 	'./core/toType',
 	'./core/isWindow',
 	'./core/isFunction',
-	'./core/isNumber',
-	'./core/hasOwn',
-	'./core/toString',
-	'./core/getProto',
-	'./core/fnToString',
-	'./core/likeArray',
+	'./core/isArrayLike',
 	'./core/isPlainObject'
-], function (POE, toType, isWindow, isFunction, isNumber, hasOwn, toString, getProto, fnToString, likeArray, isPlainObject) {
+], function (POE, toType, isWindow, isFunction, isArrayLike, isPlainObject) {
 
 	'use strict'
 
-	POE.type = {
-		get: toType,
+	POE.extend({
+		type: toType,
 		isFunction: isFunction,
 		isWindow: isWindow,
 		isString: function(obj) {
@@ -30,7 +25,9 @@ define([
 		isDate: function(obj) {
 			return toType(obj) == 'date'
 		},
-		isNumber: isNumber,
+		isNumber: function(obj){
+			return toType(obj) =='number'
+		},
 		isObject: function(obj) {
 			return toType(obj) == 'object'
 		},
@@ -40,12 +37,12 @@ define([
 		isUndefined: function(obj) {
 			return obj === undefined
 		},
-		likeArray: likeArray,
+		likeArray: isArrayLike,
 		isEmpty: function(obj) {
 			if (obj === '') {
 				return true
 			}
-			if (isNumber(obj)) {
+			if (toType(obj) == 'number') {
 				return false
 			}
 
@@ -54,8 +51,15 @@ define([
 			}
 			return true
 		},
-		isPlainObject: isPlainObject
-	}
+		isPlainObject: isPlainObject,
+		isEmptyObject: function( obj ) {
+			var name;
 
-	return POE.type
+			for ( name in obj ) {
+				return false;
+			}
+			return true;
+		},
+	})
+	return POE
 })
