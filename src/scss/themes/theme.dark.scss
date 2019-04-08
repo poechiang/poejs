@@ -1,0 +1,70 @@
+$foreColor:#414141;
+
+$pageBackgroundColor: #efefef!default;
+$baseFrontSize: .12rem!default;
+$linkColors: #888,#f80,#f00!default;
+$linkColors:(
+	link:#888,
+	hover:#bbb,
+	active:#616161,
+	visited:#888
+);
+$btnBackColors: (
+    normal: transparent #E4EAEC #CCD5DB,
+    default: #D2D8DA #E4EAEC #CCD5DB,
+    primary: #62A8EA #89BCEB #4E97D9,
+    secondary: #57C7D4 #77D6E1 #47B8C6,
+    success: #46BE8A #5CD29D #36AB7A,
+    warning: #F2A654 #ffBE78 #EC9940,
+    error: #F96868 #FA8A8A #E9595B
+);
+$btnForeColors: (
+    normal:#76838F #76838F #76838F,
+    default:#76838F #76838F #76838F,
+    primary:#FFFFFF #FFFFFF #FFFFFF,
+    secondary:#FFFFFF #FFFFFF #FFFFFF,
+    success:#FFFFFF #FFFFFF #FFFFFF,
+    warning:#FFFFFF #FFFFFF #FFFFFF,
+    error:#FFFFFF #FFFFFF #FFFFFF
+);
+$lblBackColors: (
+    default: #D2D8DA,
+    primary: #62A8EA,
+    secondary: #57C7D4,
+    success: #46BE8A,
+    warning: #F2A654,
+    error: #F96868
+);
+$lblForeColors: (
+    default:#76838F,
+    primary:#FFFFFF,
+    secondary:#FFFFFF,
+    success:#FFFFFF,
+    warning:#FFFFFF,
+    error:#FFFFFF
+);
+
+$tipColors: (
+    default: #888888,
+    primary: #62A8EA,
+    secondary: #57C7D4,
+    success: #46BE8A,
+    warning: #F2A654,
+    error: #F96868
+);
+$uiThemeColors: (
+    info: #2196f3,
+    success: #46BE8A,
+    warn: #F2A654,
+    error: #F96868
+);
+
+$uiColors:(
+    mask:rgba(0,0,0,.5),
+    cancel:#F96868,
+    okay:#46BE8A
+);
+$placeholder:(
+    color:#888888,
+    font-size:.14rem
+);

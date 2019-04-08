@@ -1,0 +1,77 @@
+@charset "utf-8";
+@import 'themes/theme.dark';
+@import 'var';
+@import 'mixin';
+
+/**
+ *	css 初始化
+ */
+*,
+:after,
+::before {
+	@include prefixAttr(box-sizing,border-box);
+}
+@each $tag in $noMPTags {
+	#{$tag} {
+		margin: 0;
+		padding: 0;
+	} 
+}
+html{
+	font-size: 625%;
+}
+body{
+	font-size:12px;
+	font-size: $baseFrontSize;
+	color:$foreColor;
+	background-color:#f1f1f1;
+}
+
+a{
+	text-decoration: none;
+}
+@each $i in $linkStates{
+	a.#{$i}{
+		color:map-get($linkColors,$i);
+	}
+}
+
+a img{
+	border:none;
+	outline: none;
+}
+
+
+input{
+	padding:0 .05rem;
+}
+input[type="number"]{
+	padding-right: 0;
+	text-align: right;
+}
+input[type="radio"]{
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+input[type="checkbox"]{
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: -.02rem;
+}
+textarea{
+    padding: 0 .05rem;
+}
+
+ul,ol,dl{
+	list-style: none;
+	&:reset{
+		list-style:initial;
+	}
+}
+/* :focus{
+	outline-color: #2196F3;
+    outline-offset: -.01rem;
+    outline-style: dashed;
+    outline-width: .01rem;
+} */

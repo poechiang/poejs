@@ -2,14 +2,14 @@ define([
 	'./core',
 	'./selector',
 	'./callbacks',
+	'./class',
+	'./console',
+	'./css',
 	'./dom',
+	'./event',
 	'./deferred',
-	'./globalEval',
 	'./support',
 	'./type',
-	'./exports/amd',
-	'./exports/global'
-
 ], function(POE) {
 	'use strict'
 
@@ -27,7 +27,6 @@ define([
 
 		return this
 	}
-
 	POE.extend({
 
 		isReady: false,
@@ -71,10 +70,46 @@ define([
 
 
 	try {
-		if (window.console && window.console.log) {
-			console.log('欢迎使用POE前端框架\n框架作者： \t\thttps://poechiang.tech\n文档及API说明： \thttps://poejs.poechiang.tech');
+		POE.con.info('欢迎使用POE前端框架\n框架作者： \t\thttps://poechiang.tech\n文档及API说明： \thttps://poejs.poechiang.tech')
+
+	} catch (e) {
+		throw e
+	}
+
+
+	if (typeof define === 'function' && define.amd) {
+		define('poe', [], function() {
+			return POE
+		})
+	}
+
+
+
+	var
+
+		// Map over POE in case of overwrite
+		_POE = window.POE,
+
+		// Map over the $ in case of overwrite
+		_$$ = window.$$
+
+	POE.noConflict = function(deep) {
+		if (window.$$ === POE) {
+			window.$$ = _$$
 		}
-	} catch (e) {}
+
+		if (deep && window.POE === POE) {
+			window.POE = _POE
+		}
+
+		return POE
+	}
+
+	if (!noGlobal) {
+		window.POE = window.$$ = POE
+	}
+
+
 
 	return POE
 

@@ -1,32 +1,14 @@
 define([
 	'./toType',
+	'./getAll',
 	'./merge',
-], function(toType, merge) {
+	'./htmlPrefilter'
+], function(toType, getAll, merge,htmlPrefilter) {
 
 	'use strict'
 
 	var rhtml = /<|&#?\w+;/
 
-	function getAll(context, tag) {
-
-		var ret
-
-		if (typeof context.getElementsByTagName !== 'undefined') {
-			ret = context.getElementsByTagName(tag || '*')
-
-		} else if (typeof context.querySelectorAll !== 'undefined') {
-			ret = context.querySelectorAll(tag || '*')
-
-		} else {
-			ret = []
-		}
-
-		if (tag === undefined || tag && (context.nodeName && context.nodeName.toLowerCase() === tag.toLowerCase())) {
-			return merge([context], ret)
-		}
-
-		return ret
-	}
 
 	return function(elems, context, scripts, selection, ignored) {
 		var elem, tmp, tag, wrap, attached, j,
@@ -37,12 +19,12 @@ define([
 			rtagName = (/<([a-z][^\/\0>\x20\t\r\n\f]*)/i)
 
 		var wrapMap = {
-			option: [1, "<select multiple='multiple'>", "</select>"],
-			thead: [1, "<table>", "</table>"],
-			col: [2, "<table><colgroup>", "</colgroup></table>"],
-			tr: [2, "<table><tbody>", "</tbody></table>"],
-			td: [3, "<table><tbody><tr>", "</tr></tbody></table>"],
-			_default: [0, "", ""]
+			option: [1, '<select multiple="multiple">', '</select>'],
+			thead: [1, '<table>', '</table>'],
+			col: [2, '<table><colgroup>', '</colgroup></table>'],
+			tr: [2, '<table><tbody>', '</tbody></table>'],
+			td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
+			_default: [0, '', '']
 		}
 		wrapMap.optgroup = wrapMap.option
 		wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead
@@ -71,7 +53,7 @@ define([
 					// Deserialize a standard representation
 					tag = (rtagName.exec(elem) || ['', ''])[1].toLowerCase()
 					wrap = wrapMap[tag] || wrapMap._default
-					tmp.innerHTML = wrap[1] + elem.replace(/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi, "<$1></$2>") + wrap[2]
+					tmp.innerHTML = wrap[1] + htmlPrefilter(elem) + wrap[2]
 
 					// Descend through wrappers to the right content
 					j = wrap[0]
@@ -98,7 +80,14 @@ define([
 		i = 0
 		while ((elem = nodes[i++])) {
 
+			contains = POE.contains( elem.ownerDocument, elem )
+
 			tmp = getAll(fragment.appendChild(elem), 'script')
+
+			// Preserve script evaluation history
+			if ( contains ) {
+				setGlobalEval( tmp );
+			}
 
 			if (scripts) {
 				j = 0

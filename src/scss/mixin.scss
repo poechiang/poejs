@@ -1,0 +1,84 @@
+
+
+@mixin prefixAttr($attr,$value){
+    -o-#{$attr}:$value;
+    -ms-#{$attr}:$value;
+    -moz-#{$attr}:$value;
+    -webkit-#{$attr}:$value;
+    #{$attr}:$value;
+}
+@mixin prefixValue($attr,$value){
+    #{$attr}:-o-#{$value};
+    #{$attr}:-ms-#{$value};
+    #{$attr}:-moz-#{$value};
+    #{$attr}:-webkit-#{$value};
+    #{$attr}:$value;
+}
+@mixin compatibleAttr($attr,$value){
+    -o-#{$attr}:$value;
+    -ms-#{$attr}:$value;
+    -moz-#{$attr}:$value;
+    -webkit-#{$attr}:$value;
+    #{$attr}:$value;
+}
+@mixin compatibleValue($attr,$value){
+    #{$attr}:-o-#{$value};
+    #{$attr}:-ms-#{$value};
+    #{$attr}:-moz-#{$value};
+    #{$attr}:-webkit-#{$value};
+    #{$attr}:$value;
+}
+@mixin blurFilter($blur){
+    @include prefixAttr(filter,blur(#{$blur/100}rem));
+
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=#{$blur}, MakeShadow=false); /* IE6~IE9 */
+    margin: -#{$blur/100*2}rem;
+}
+
+@mixin transition($property,$during:.4s,$delay:0,$easing:ease-in-out){
+
+    @if $delay == 0 {
+        @include prefixAttr(transition,$property $during $easing);
+    } @else {
+        @include prefixAttr(transition,$property $during $easing $delay);
+    }
+}
+@mixin boxShadow($b,$c:#888,$h:0, $v:0, $s:0,$t:0){
+    @if $t == 0 {
+        @include prefixAttr(box-shadow, $h $v $b $s $c);
+    } @else {
+        @include prefixAttr(box-shadow, $h $v $b $s $c $t);
+    }
+}
+
+
+@mixin flexDirection($direct){
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    @include prefixValue(display,flex);
+
+    @include prefixAttr(flex-direction,$direct);
+}
+@mixin justifyContent($justify){
+    -o-justify-content:$justify;
+    -ms-justify-content:$justify;
+    -moz-justify-content:$justify;
+    -webkit-justify-content:$justify;
+    justify-content:$justify;
+}
+
+@mixin alignItems($align){
+    -o-align-items:$align;
+    -ms-align-items:$align;
+    -moz-align-items:$align;
+    -webkit-align-items:$align;
+    align-items:$align;
+}
+@mixin alignContent($align){
+    -o-align-content:$align;
+    -ms-align-content:$align;
+    -moz-align-content:$align;
+    -webkit-align-content:$align;
+    align-content:$align;
+}

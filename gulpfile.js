@@ -15,7 +15,7 @@ var pkg = JSON.parse(require('fs').readFileSync('./package.json')),
 
 let port = 8080
 let script = function() {
-	var outFile = './build/' + pkg.name + '.' + pkg.version + '.js'
+	var outFile = './dist/' + pkg.name + '.' + pkg.version + '.js'
 	rjs.optimize({
 		findNestedDependencies: false,
 		baseUrl: './src/',
@@ -43,7 +43,7 @@ let script = function() {
 			suffix: '.min'
 		}))
 		.pipe(uglify())
-		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('dist'))
 		.pipe(reload({
 			stream: true
 		}))
@@ -52,7 +52,7 @@ let style = function(){
 	return gulp.src(['./src/scss/poe.scss'])
 		.pipe(scss())
 		.pipe(concat(pkg.name + '.' + pkg.version + '.css'))
-		.pipe(gulp.dest('./build'))
+		.pipe(gulp.dest('./dist'))
 		.pipe(filter('**/*.css'))
 		.pipe(reload({
 			stream: true
@@ -61,7 +61,7 @@ let style = function(){
 			suffix: '.min'
 		}))
 		.pipe(cleanCss())
-		.pipe(gulp.dest('build'))
+		.pipe(gulp.dest('dist'))
 		.pipe(reload({
 			stream: true
 		}))

@@ -3,6 +3,7 @@ define([
 	'./var/document',
 	'./var/rsingleTag',
 	'./core/inArray',
+	'./core/extend',
 	'./var/class2type',
 	'./core/isFunction',
 	'./core/isWindow',
@@ -11,9 +12,10 @@ define([
 	'./core/isPlainObject',
 	'./core/each',
 	'./core/merge',
+	'./core/makeArray',
 	'./core/map',
 	'./core/grep',
-], function(arr, document, rsingleTag, inArray, class2type, isFunction, isWindow, toType, isArrayLike, isPlainObject, each, merge, map, grep) {
+], function(arr, document, rsingleTag, inArray, extend, class2type, isFunction, isWindow, toType, isArrayLike, isPlainObject, each, merge,makeArray, map, grep) {
 
 	'use strict'
 
@@ -27,79 +29,9 @@ define([
 
 	POE.expando = 'POE' + (version + Math.random()).replace(/\D/g, '')
 
+	POE.extend = extend
+	
 	POE.isReady = true
-
-	POE.extend = function() {
-		var options, name, src, copy, copyIsArray, clone,
-			target = arguments[0] || {},
-			i = 1,
-			length = arguments.length,
-			deep = false
-
-		// Handle a deep copy situation
-		if (typeof target === 'boolean') {
-			deep = target
-
-			// Skip the boolean and the target
-			target = arguments[i] || {}
-			i++
-		}
-
-		// Handle case when target is a string or something (possible in deep copy)
-		if (typeof target !== 'object' && !isFunction(target)) {
-			target = {}
-		}
-
-		// Extend POE itself if only one argument is passed
-		if (i === length) {
-			target = this
-			i--
-		}
-
-		for (; i < length; i++) {
-
-			// Only deal with non-null/undefined values
-			if ((options = arguments[i]) != null) {
-
-				// Extend the base object
-				for (name in options) {
-					copy = options[name]
-
-					// Prevent Object.prototype pollution
-					// Prevent never-ending loop
-					if (name === '__proto__' || target === copy) {
-						continue
-					}
-
-					// Recurse if we're merging plain objects or arrays
-					if (deep && copy && (isPlainObject(copy) ||
-							(copyIsArray = Array.isArray(copy)))) {
-						src = target[name]
-
-						// Ensure proper type for the source value
-						if (copyIsArray && !Array.isArray(src)) {
-							clone = []
-						} else if (!copyIsArray && !isPlainObject(src)) {
-							clone = {}
-						} else {
-							clone = src
-						}
-						copyIsArray = false
-
-						// Never move original objects, clone them
-						target[name] = POE.extend(deep, clone, copy)
-
-						// Don't bring in undefined values
-					} else if (copy !== undefined) {
-						target[name] = copy
-					}
-				}
-			}
-		}
-
-		// Return the modified object
-		return target
-	}
 
 	POE.fn = POE.prototype = {
 
@@ -115,52 +47,64 @@ define([
 	}
 
 	POE.extend({
-
-		error: function(msg) {
-			throw new Error(msg)
-		},
-
+		// A global GUID counter for objects
+		guid: 1,
 		noop: function() {},
 
 		each: each,
+		makeArray:makeArray,
+		inArray: inArray,
+		merge: merge,
+		grep: grep,
+		map: map,
+		
+		delay:function(fn,delay,args,context){
+			if (delay>0) {
+				setTimeout(function(){
+					fn.apply(context,POE.toArray(args))
+				},delay)
+			}else{
+				fn.apply(context,POE.toArray(args))
+			}
+		},
+		eval:function(code, node, doc) {
+			doc = doc || document
 
+			var script = doc.createElement('script')
+
+			script.text = code
+
+			if (node) {
+				each(['type','src','nonce','noModule'],function(item){
+					var val = node[item] || node.getAttribute && node.getAttribute(item)
+					if (val) {
+						script.setAttribute(item, val)
+					}
+				})
+			}
+			
+			doc.head.appendChild(script).parentNode.removeChild(script)
+		},
 		trim: function(text) {
 			return text == null ?
 				'' :
 				(text + '').replace(rtrim, '')
 		},
-
-		// results is for internal usage only
-		makeArray: function(arr, results) {
-			var ret = results || []
-
-			if (arr != null) {
-				if (isArrayLike(Object(arr))) {
-					merge(ret,
-						typeof arr === 'string' ?
-						[arr] : arr
-					)
-				} else {
-					push.call(ret, arr)
-				}
+		toArray:function(obj){
+			if (isArrayLike(obj)) {
+				return [].slice.call(obj)
 			}
-
-			return ret
-		},
-
-		inArray: inArray,
-
-		// Support: Android <=4.0 only, PhantomJS 1 only
-		// push.apply(_, arraylike) throws on ancient WebKit
-		merge: merge,
-
-		grep: grep,
-
-		// arg is for internal usage only
-		map: map,
-
-		// A global GUID counter for objects
-		guid: 1,
+			else{
+				var arr = []
+				for(var x in obj){
+					if (isFunction(obj[x])) {
+						continue
+					}
+					arr.push(obj[x])
+				}
+				return arr
+			}
+		}
 	})
 
 	init = POE.fn.init = function(selector, context, root) {
@@ -258,24 +202,14 @@ define([
 			// Return the newly-formed element set
 			return ret
 		},
-
-		slice: function() {
-			return this.pushStack(slice.apply(this, arguments))
-		},
 		toArray: function() {
 			return this.slice()
 		},
 
-		get: function(num) {
 
-			// Return all the elements in a clean array
-			if (num == null) {
-				return this.slice()
-			}
-			return num < 0 ? this[num + this.length] : this[num]
+		slice: function() {
+			return this.pushStack(slice.apply(this, arguments))
 		},
-
-
 
 		// Execute a callback for every element in the matched set.
 		each: function(callback) {
@@ -289,24 +223,6 @@ define([
 		},
 
 
-		eq: function(i) {
-			var len = this.length,
-				j = +i + (i < 0 ? len : 0)
-			return this.pushStack(j >= 0 && j < len ? [this[j]] : [])
-		},
-
-		first: function() {
-			return this.eq(0)
-		},
-
-		last: function() {
-			return this.eq(-1)
-		},
-
-
-		end: function() {
-			return this.prevObject || this.constructor()
-		},
 
 		// For internal use only.
 		// Behaves like an Array's method, not like a POE method.

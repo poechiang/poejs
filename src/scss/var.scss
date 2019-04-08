@@ -1,0 +1,41 @@
+$list:ul dl ol;
+$floats:left right none inherit;
+$overflows:visible hidden scroll auto inherit;
+$textAligns:left right center justify inherit;
+$verAligns:baseline sub super top text-top middle bottom text-bottom inherit;
+$clears:left right both none inherit;
+$fontWeights:normal bold bolder lighter 100 200 300 400 500 600 700 800 900;
+$fontStyles:inherit,initial,italic,normal,oblique;
+$fontStretchs: condensed,expanded,extra-condensed,extra-expanded,inherit,initial,normal,semi-condensed,semi-expanded,ultra-condensed,ultra-expanded,unset;
+$listStyleType:none disc circle square decimal decimal-leading-zero lower-roman upper-roman lower-alpha upper-alpha lower-greek lower-latin upper-latin hebrew armenian georgian cjk-ideographic hiragana katakana hiragana-iroha katakana-iroha inherit;
+$cursors:default auto crosshair pointer move e-resize ne-resize nw-resize n-resize se-resize sw-resize s-resize w-resize text wait help;
+$displays:none block inline inline-block list-item run-in table inline-table table-row-group table-header-group table-footer-group table-row table-column-group table-column table-cell table-caption inherit;
+$positions:absolute fixed relative static inherit;
+$visibilities:visible hidden collapse inherit;
+$textDecorations:none underline overline line-through blink inherit;
+$textTransforms:none capitalize uppercase lowercase inherit;
+$whiteSpaces:normal pre nowrap pre-wrap pre-line inherit;
+$textOverflows:clip ellipsis;
+$textWraps: normal none unrestricted suppress;
+$wordBreaks: inherit,initial,normal break-all keep-all break-word;
+$wordWraps: normal break-word;
+$boxSizings: content-box border-box inherit;
+$resizes: none both horizontal vertical;
+
+
+$btnTypes: normal default primary secondary success warning error;
+$lblTypes: default primary secondary success warning error;
+$tipTypes: default primary secondary success warning error;
+
+$linkStates:link hover active visited;
+$noMPTags:body h1 h2 h3 h4 h5 h6 hr p blockquote dl dt dd ul ol li pre form fieldset legend button input textarea th td;
+
+$flexDirections:row row-reverse column column-reverse;
+
+$flexWraps:wrap wrap-reverse wrap-inverse;
+
+$notifyTypes:success info warn error;
+
+
+$uiIndex:100020;
+
