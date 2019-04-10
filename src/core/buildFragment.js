@@ -2,33 +2,23 @@ define([
 	'./toType',
 	'./getAll',
 	'./merge',
-	'./htmlPrefilter'
-], function(toType, getAll, merge,htmlPrefilter) {
+	'./htmlPrefilter',
+	'./setGlobalEval',
+	'./inArray',
+	'./wrapMap',
+	'../var/rtagName'
+], function(toType, getAll, merge,htmlPrefilter,setGlobalEval,inArray,wrapMap,rtagName) {
 
 	'use strict'
 
 	var rhtml = /<|&#?\w+;/
 
-
 	return function(elems, context, scripts, selection, ignored) {
-		var elem, tmp, tag, wrap, attached, j,
+		var elem, tmp, tag, wrap, contains,attached, j,
 			fragment = context.createDocumentFragment(),
 			nodes = [],
 			i = 0,
-			l = elems.length,
-			rtagName = (/<([a-z][^\/\0>\x20\t\r\n\f]*)/i)
-
-		var wrapMap = {
-			option: [1, '<select multiple="multiple">', '</select>'],
-			thead: [1, '<table>', '</table>'],
-			col: [2, '<table><colgroup>', '</colgroup></table>'],
-			tr: [2, '<table><tbody>', '</tbody></table>'],
-			td: [3, '<table><tbody><tr>', '</tr></tbody></table>'],
-			_default: [0, '', '']
-		}
-		wrapMap.optgroup = wrapMap.option
-		wrapMap.tbody = wrapMap.tfoot = wrapMap.colgroup = wrapMap.caption = wrapMap.thead
-		wrapMap.th = wrapMap.td
+			l = elems.length
 
 		for (; i < l; i++) {
 			elem = elems[i]
@@ -80,10 +70,19 @@ define([
 		i = 0
 		while ((elem = nodes[i++])) {
 
-			contains = POE.contains( elem.ownerDocument, elem )
 
+			// Skip elements already in the context collection (trac-4087)
+			if (selection && inArray(elem, selection) > -1) {
+				if (ignored) {
+					ignored.push(elem)
+				}
+				continue
+			}
+
+			contains = elem.ownerDocument && POE.contains( elem.ownerDocument, elem )
+	
 			tmp = getAll(fragment.appendChild(elem), 'script')
-
+			
 			// Preserve script evaluation history
 			if ( contains ) {
 				setGlobalEval( tmp );

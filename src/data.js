@@ -1,9 +1,10 @@
 define([
 './core',
-'../core/camelCase',
+'./core/access',
+'./core/camelCase',
 './data/dataPriv',
 './data/dataUser',
-	],function(POE,camelCase,dataPriv,dataUser) {
+	],function(POE,access, camelCase,dataPriv,dataUser) {
 
 	'use strict'
 	

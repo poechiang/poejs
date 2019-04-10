@@ -1,5 +1,8 @@
 define([
 		'./core',
+		'./core/nodeName',
+		'./core/push',
+		'./core/concat',
 		'./core/getAll',
 		'./core/htmlPrefilter',
 		'./core/buildFragment',
@@ -15,10 +18,13 @@ define([
 		'./core/access',
 		'./core/setGlobalEval',
 		'./core/isFunction',
+		'./core/acceptData',
+		'./core/wrapMap',
+		'./var/rtagName',
 		'./support',
 	],
-	function(POE, getAll, htmlPrefilter, buildFragment, each, document, rsingleTag, rparentsprev,
-		winnow, filter, sibling, dataPriv, dataUser, access, setGlobalEval, isFunction, support) {
+	function(POE, nodeName, push, concat, getAll, htmlPrefilter, buildFragment, each, document, rsingleTag, rparentsprev,
+		winnow, filter, sibling, dataPriv, dataUser, access, setGlobalEval, isFunction, acceptData, wrapMap, rtagName, support) {
 
 		'use strict'
 
@@ -111,6 +117,10 @@ define([
 				} else if (nodeName === 'input' || nodeName === 'textarea') {
 					dest.defaultValue = src.defaultValue
 				}
+			},
+			disableScript = function(elem) {
+				elem.type = (elem.getAttribute("type") !== null) + "/" + elem.type
+				return elem
 			},
 			domManip = function(collection, args, callback, ignored) {
 
@@ -275,6 +285,7 @@ define([
 				}
 
 				return POE.merge([], parsed.childNodes)
+
 			},
 			filter: filter,
 
@@ -729,7 +740,7 @@ define([
 			insertBefore: 'before',
 			insertAfter: 'after',
 			replaceAll: 'replaceWith'
-		}, function(name, original) {
+		}, function(original, name) {
 			POE.fn[name] = function(selector) {
 				var elems,
 					ret = [],

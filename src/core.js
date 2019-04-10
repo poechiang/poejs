@@ -15,7 +15,10 @@ define([
 	'./core/makeArray',
 	'./core/map',
 	'./core/grep',
-], function(arr, document, rsingleTag, inArray, extend, class2type, isFunction, isWindow, toType, isArrayLike, isPlainObject, each, merge,makeArray, map, grep) {
+	'./core/slice',
+	'./core/push'
+], function(arr, document, rsingleTag, inArray, extend, class2type, isFunction, isWindow, toType, 
+	isArrayLike, isPlainObject, each, merge,makeArray, map, grep,slice,push) {
 
 	'use strict'
 
@@ -59,12 +62,13 @@ define([
 		map: map,
 		
 		delay:function(fn,delay,args,context){
-			if (delay>0) {
+			if (delay===undefined) {
+				fn.apply(context,POE.toArray(args))
+			}
+			else{
 				setTimeout(function(){
 					fn.apply(context,POE.toArray(args))
-				},delay)
-			}else{
-				fn.apply(context,POE.toArray(args))
+				},delay||0)
 			}
 		},
 		eval:function(code, node, doc) {
@@ -226,7 +230,7 @@ define([
 
 		// For internal use only.
 		// Behaves like an Array's method, not like a POE method.
-		push: arr.push,
+		push: push,
 		sort: arr.sort,
 		splice: arr.splice,
 	})

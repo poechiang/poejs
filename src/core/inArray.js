@@ -1,7 +1,9 @@
-define(function(){
+define([
+'./indexOf'
+	],function(indexOf) {
 	'use strict'
 
-	return function( elem, arr, i ) {
-		return arr == null ? -1 : arr.indexOf(elem, i )
+	return function(elem, arr, i) {
+		return arr == null ? -1 : indexOf.call( arr, elem, i )
 	}
 })

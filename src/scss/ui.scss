@@ -7,7 +7,7 @@
 /**
  *    通知栏
  */
-#poe-notify{
+.pui-notify{
 	position: fixed;
 	width: 100%;
 	top: -.5rem;
@@ -16,16 +16,13 @@
 	min-height: .5rem;
 	z-index: 100100;
 	display: table;
-	@include transition(all, .2s);
-
-	p{
+	.pui-content{
 		display: table-cell;
 		padding:.05rem .1rem ;
 		vertical-align: middle;
 		text-indent:2em;
 		height:100%;
 		opacity: 0;
-		@include transition(all, .2s, .2s);
 	}
 	&.showing{
 		top:0;
@@ -35,20 +32,28 @@
 			}
 		}
 
-		p{
+		.pui-content{
 			opacity: 1;
 		}
 	}
-	&.hiding{
-		@include transition(all, .2s, .2s);
-		p{
-			@include transition(all, .2s);
+	&.anim{
+		@include transition(all, .2s);
+
+		.pui-content{
+			@include transition(all, .2s, .2s);
+		}
+
+		&.hiding{
+			@include transition(all, .2s, .2s);
+			.pui-content{
+				@include transition(all, .2s);
+			}
 		}
 	}
 }
 
 @media screen and (min-width: 500px){
-	#poe-notify{
+	.pui-notify{
 		width:5rem;
 		left: 50%;
 		margin-left: -2.5rem
@@ -87,7 +92,7 @@
 /**
  *    模态对话框
  */
-.poe-mask{
+.pui-mask{
 	position:fixed;
 	left:0;
 	top:0;
@@ -97,220 +102,198 @@
 	height:100%;
 	z-index: $uiIndex;
 	display:none;
-	.inner{
-		display: table-cell;
-		vertical-align: middle;
-		.box{
+		.pui-box{
 			position: relative;
 			left: 0;
 			top:0;
+	}
+	&.modal  .pui-box,
+	&.input  .pui-box{
+		margin:auto;
+		background-color:#ffffff;
+		border-radius: .05rem;
+		box-shadow:0 0 .1rem rgba(0,0,0,.5);
+		/*width:80%;*/
+		min-width: 5rem;
+		max-width: 5rem;
+		font-size: .16rem;
+		overflow: hidden;
+		apple-user-select: none;
+		khtml-user-select: none;
+		moz-user-select: none;
+		ms-user-select: none;
+		webkit-user-select: none;
+		user-select:none;
+		.pui-title{
+			line-height: .36rem;
+			height: .36rem;
+			font-size: .12rem;
+			padding:0 .15rem;
+			color:#888888;
+			&:empty{
+				display: none;
+			}
+			#poe-mask.movable  & {
+				cursor: move;
+			}
 		}
-		.box.modal,.box.input{
-			margin:auto;
-			background-color:#ffffff;
-			border-radius: .05rem;
-			box-shadow:0 0 .1rem rgba(0,0,0,.5);
-			/*width:80%;*/
-			min-width: 5rem;
-			max-width: 5rem;
-			font-size: .16rem;
-			overflow: hidden;
-			apple-user-select: none;
-			khtml-user-select: none;
-			moz-user-select: none;
-			ms-user-select: none;
-			webkit-user-select: none;
-			user-select:none;
-			.title{
+		.pui-body{
+			padding:0 .15rem;
+			display: table;
+			min-height: .8rem;
+			width:100%;
+		}
+		.pui-foot{
+			.dlg-btn{
+				background-color:transparent;
 				line-height: .36rem;
 				height: .36rem;
-				font-size: .12rem;
-				padding:0 .15rem;
-				color:#888888;
+				border:none;
+				outline: none;
+				font-size: .16rem;
+				&[disabled]{
+					background-color:rgba(0,0,0,.05)!important;
+					color:#888!important;
+					cursor:not-allowed;
+				}
+				&:hover{
+					background-color:rgba(0,0,0,.1);
+				}
+				&:active{
+					background-color:rgba(0,0,0,.2);
+				}
+				&.pui-confirm{
+					color:#4e97d9;
+				}
+				&.pui-cancel{
+					color:#F96868;
+				}
+				&.pui-abort{
+					color:#76838f;
+				}
 				&:empty{
 					display: none;
 				}
-				#poe-mask.movable .inner & {
-					cursor: move;
-				}
-			}
-			.body{
-				padding:0 .15rem;
-				display: table;
-				min-height: .8rem;
-				width:100%;
-			}
-			.foot{
-				.dlg-btn{
-					background-color:transparent;
-					line-height: .36rem;
-					height: .36rem;
-					border:none;
-					outline: none;
-					font-size: .16rem;
-					&[disabled]{
-						background-color:rgba(0,0,0,.05)!important;
-						color:#888!important;
-						cursor:not-allowed;
-					}
-					&:hover{
-						background-color:rgba(0,0,0,.1);
-					}
-					&:active{
-						background-color:rgba(0,0,0,.2);
-					}
-					&.confirm{
-						color:#4e97d9;
-					}
-					&.cancel{
-						color:#F96868;
-					}
-					&.abort{
-						color:#76838f;
-					}
-					&:empty{
-						display: none;
-					}
-				}
 			}
 		}
+	}
 
-		.box.input{
-			.body{
-				min-height:auto;
-				.inner{
-					.flex-row{
-						margin:.1rem auto;
+	&.input  .pui-box{
+		.pui-body{
+			min-height:auto;
+				.flex-row{
+					margin:.1rem auto;
+					border-radius:.05rem;
+					textarea,input{
+						outline:none;
+						border:.01rem solid #b1b1b1;
 						border-radius:.05rem;
-						textarea,input{
-							outline:none;
-							border:.01rem solid #b1b1b1;
-							border-radius:.05rem;
-						}
-						input{
-							line-height:.3rem;
-							&[type="password"]{
-								position:absolute;
-								/* border:none;
-								border-radius:0;
-								height:.34rem;
-								font-size:2em;
-								text-align:center;
-								color:transparent;
-								text-shadow:0 0 0 #414141; */
-								opacity:0;
-							}
-							/* &:not(:first-child){
-								border-left:.01rem solid #b1b1b1;
-							} */
-						}
-						.add,.sub{
-							width:.5rem;
-						}
-
-						.pwd-item{
+					}
+					input{
+						line-height:.3rem;
+						&[type="password"]{
+							position:absolute;
+							/* border:none;
+							border-radius:0;
 							height:.34rem;
-							line-height:.34rem;
-							margin:0 .05rem;
-							border-bottom:.04rem solid #414141;
-							&:not(:empty){
-								border-bottom:none;
-							}
+							font-size:2em;
+							text-align:center;
+							color:transparent;
+							text-shadow:0 0 0 #414141; */
+							opacity:0;
 						}
-
-					
+						/* &:not(:first-child){
+							border-left:.01rem solid #b1b1b1;
+						} */
+					}
+					.add,.sub{
+						width:.5rem;
 					}
 
-					textarea{
-						margin:.1rem 0;
-					}
-
-
-					.verif {
-					    height: 0;
-					    overflow: hidden;
-						line-height: .4rem;
-					    transition: height .2s ease-in-out;
-					    .flash{
-					    	margin:0;
-					    	padding:0;
-					    	height:100%;
-					    }
-					    &.show {
-						    height: .4rem;
+					.pwd-item{
+						height:.34rem;
+						line-height:.34rem;
+						margin:0 .05rem;
+						border-bottom:.04rem solid #414141;
+						&:not(:empty){
+							border-bottom:none;
 						}
 					}
 
+				
+				}
+
+				textarea{
+					margin:.1rem 0;
+				}
+
+
+				.verif {
+				    height: 0;
+				    overflow: hidden;
+					line-height: .4rem;
+				    transition: height .2s ease-in-out;
+				    .flash{
+				    	margin:0;
+				    	padding:0;
+				    	height:100%;
+				    }
+				    &.show {
+					    height: .4rem;
+					}
+				}
+		}
+		.pui-title+.pui-body{
+			padding-top:.2rem;
+		}
+	}
+	&.toast  .pui-box,
+	&.loading  .pui-box {
+		margin:auto;
+		background-color: rgba(0,0,0,.7);
+		border-radius: .1rem;
+		padding: .1rem;
+		width:1.3rem;
+		height:1.3rem;
+		display: table;
+		.pui-spinner {
+			position: relative;
+			margin:.1rem auto;
+			display:block;
+			height: .6rem;
+			width: .8rem;
+			.pui-scale{
+				width: 4%;
+				height: calc(100% / 6);
+				background-color: #fff;
+				position: absolute;
+				border-radius: .015rem;
+				left: 48%;
+				top:calc(100% / 6);
+				transform-origin: 50% 200%;
+				@include prefixAttr(animation,ani-opacity .6s linear infinite);
+				@for $i from 1 to 13 {
+					&:nth-child(#{$i}){
+						transform:rotate(-#{30*$i}deg);
+						-webkit-animation-delay:-#{.05*$i}s;
+						-moz-animation-delay:-#{.05*$i}s;
+						-ms-animation-delay:-#{.05*$i}s;
+						-o-animation-delay:-#{.05*$i}s;
+						animation-delay:-#{.05*$i}s;
+					}
 				}
 			}
-			.title+.body{
-				padding-top:.2rem;
+			&.icon{
+				width:.6rem;
 			}
 		}
-		.box.toast, .box.loading {
-			margin:auto;
-			background-color: rgba(0,0,0,.7);
-			border-radius: .1rem;
-			padding: .1rem;
-			width:1.3rem;
-			height:1.3rem;
-			.spinner {
-				position: relative;
-				margin:.1rem auto;
-				display:block;
-				height: .6rem;
-				width: .8rem;
-				.scale{
-					width: 4%;
-					height: calc(100% / 6);
-					background-color: #fff;
-					position: absolute;
-					border-radius: .015rem;
-					left: 48%;
-					top:calc(100% / 6);
-					transform-origin: 50% 200%;
-					@include prefixAttr(animation,ani-opacity .6s linear infinite);
-					@for $i from 1 to 13 {
-						&:nth-child(#{$i}){
-							transform:rotate(-#{30*$i}deg);
-							-webkit-animation-delay:-#{.05*$i}s;
-							-moz-animation-delay:-#{.05*$i}s;
-							-ms-animation-delay:-#{.05*$i}s;
-							-o-animation-delay:-#{.05*$i}s;
-							animation-delay:-#{.05*$i}s;
-						}
-					}
-				}
-				&.pfont.large{
-					&:before{
-						display: block;
-						text-align: center;
-						color:#fff;
-						font-size: 4em;
-						line-height: .6rem;
-					}
-					&.success:before{
-						content:"\e62c";
-					}
-					&.warn:before{
-						content:"\e60c";
-					}
-					&.error:before{
-						content:"\e624";
-					}
-					&.info:before{
-						content:"\e625";
-					}
-				}
-			}
-			.txt{
-				font-size: .16rem;
-				color: #fff;
-				line-height: .3rem;
-				text-align: center;
-				white-space: nowrap;
-				overflow: hidden;
-			}
+		.pui-content{
+			font-size: .16rem;
+			color: #fff;
+			line-height: .3rem;
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 	}
 	&.mask{
@@ -320,7 +303,7 @@
 		display: table;
 		-webkit-animation:fadeOut .2s .1s ease-in-out both;
 		animation:fadeOut .2s .1s ease-in-out both;
-		.box{
+		.pui-box{
 			-webkit-animation:zoomOut .2s ease-in-out both;
 			animation:zoomOut .2s ease-in-out both;
 		}
@@ -330,7 +313,7 @@
 		&.anim{
 			-webkit-animation:fadeIn .2s ease-in-out both;
 			animation:fadeIn .2s ease-in-out both;
-			.box{
+			.pui-box{
 				-webkit-animation:zoomIn .2s .1s ease-in-out both;
 				animation:zoomIn .2s .1s ease-in-out both;
 			}

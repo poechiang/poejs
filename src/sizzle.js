@@ -3,7 +3,6 @@ define([
 	'../external/sizzle'
 ], function(POE, sizzle) {
 	'use strict'
-
 	POE.extend({
 		find: sizzle,
 		expr: sizzle.selectors,

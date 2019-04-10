@@ -20751,7 +20751,7 @@ input[type="checkbox"].onoff-input, input[type="checkbox"].onoff, input[type="ch
 /**
  *    通知栏
  */
-#poe-notify {
+.pui-notify {
   position: fixed;
   width: 100%;
   top: -.5rem;
@@ -20759,51 +20759,53 @@ input[type="checkbox"].onoff-input, input[type="checkbox"].onoff, input[type="ch
   color: #fff;
   min-height: .5rem;
   z-index: 100100;
-  display: table;
-  -o-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out; }
-  #poe-notify p {
+  display: table; }
+  .pui-notify .pui-content {
     display: table-cell;
     padding: 0.05rem 0.1rem;
     vertical-align: middle;
     text-indent: 2em;
     height: 100%;
-    opacity: 0;
-    -o-transition: all 0.2s ease-in-out 0.2s;
-    -ms-transition: all 0.2s ease-in-out 0.2s;
-    -moz-transition: all 0.2s ease-in-out 0.2s;
-    -webkit-transition: all 0.2s ease-in-out 0.2s;
-    transition: all 0.2s ease-in-out 0.2s; }
-  #poe-notify.showing {
+    opacity: 0; }
+  .pui-notify.showing {
     top: 0; }
-    #poe-notify.showing.success {
+    .pui-notify.showing.success {
       background-color: #46BE8A; }
-    #poe-notify.showing.info {
+    .pui-notify.showing.info {
       background-color: #2196f3; }
-    #poe-notify.showing.warn {
+    .pui-notify.showing.warn {
       background-color: #F2A654; }
-    #poe-notify.showing.error {
+    .pui-notify.showing.error {
       background-color: #F96868; }
-    #poe-notify.showing p {
+    .pui-notify.showing .pui-content {
       opacity: 1; }
-  #poe-notify.hiding {
-    -o-transition: all 0.2s ease-in-out 0.2s;
-    -ms-transition: all 0.2s ease-in-out 0.2s;
-    -moz-transition: all 0.2s ease-in-out 0.2s;
-    -webkit-transition: all 0.2s ease-in-out 0.2s;
-    transition: all 0.2s ease-in-out 0.2s; }
-    #poe-notify.hiding p {
-      -o-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
+  .pui-notify.anim {
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; }
+    .pui-notify.anim .pui-content {
+      -o-transition: all 0.2s ease-in-out 0.2s;
+      -ms-transition: all 0.2s ease-in-out 0.2s;
+      -moz-transition: all 0.2s ease-in-out 0.2s;
+      -webkit-transition: all 0.2s ease-in-out 0.2s;
+      transition: all 0.2s ease-in-out 0.2s; }
+    .pui-notify.anim.hiding {
+      -o-transition: all 0.2s ease-in-out 0.2s;
+      -ms-transition: all 0.2s ease-in-out 0.2s;
+      -moz-transition: all 0.2s ease-in-out 0.2s;
+      -webkit-transition: all 0.2s ease-in-out 0.2s;
+      transition: all 0.2s ease-in-out 0.2s; }
+      .pui-notify.anim.hiding .pui-content {
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out; }
 
 @media screen and (min-width: 500px) {
-  #poe-notify {
+  .pui-notify {
     width: 5rem;
     left: 50%;
     margin-left: -2.5rem; } }
@@ -20838,7 +20840,7 @@ input[type="checkbox"].onoff-input, input[type="checkbox"].onoff, input[type="ch
 /**
  *    模态对话框
  */
-.poe-mask {
+.pui-mask {
   position: fixed;
   left: 0;
   top: 0;
@@ -20848,262 +20850,248 @@ input[type="checkbox"].onoff-input, input[type="checkbox"].onoff, input[type="ch
   height: 100%;
   z-index: 100020;
   display: none; }
-  .poe-mask .inner {
-    display: table-cell;
-    vertical-align: middle; }
-    .poe-mask .inner .box {
-      position: relative;
-      left: 0;
-      top: 0; }
-    .poe-mask .inner .box.modal, .poe-mask .inner .box.input {
-      margin: auto;
-      background-color: #ffffff;
-      border-radius: .05rem;
-      box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
-      /*width:80%;*/
-      min-width: 5rem;
-      max-width: 5rem;
-      font-size: .16rem;
-      overflow: hidden;
-      apple-user-select: none;
-      khtml-user-select: none;
-      moz-user-select: none;
-      ms-user-select: none;
-      webkit-user-select: none;
-      user-select: none; }
-      .poe-mask .inner .box.modal .title, .poe-mask .inner .box.input .title {
-        line-height: .36rem;
-        height: .36rem;
-        font-size: .12rem;
-        padding: 0 .15rem;
-        color: #888888; }
-        .poe-mask .inner .box.modal .title:empty, .poe-mask .inner .box.input .title:empty {
-          display: none; }
-        #poe-mask.movable .inner .poe-mask .inner .box.modal .title, #poe-mask.movable .inner .poe-mask .inner .box.input .title {
-          cursor: move; }
-      .poe-mask .inner .box.modal .body, .poe-mask .inner .box.input .body {
-        padding: 0 .15rem;
-        display: table;
-        min-height: .8rem;
-        width: 100%; }
-      .poe-mask .inner .box.modal .foot .dlg-btn, .poe-mask .inner .box.input .foot .dlg-btn {
-        background-color: transparent;
-        line-height: .36rem;
-        height: .36rem;
-        border: none;
+  .pui-mask .pui-box {
+    position: relative;
+    left: 0;
+    top: 0; }
+  .pui-mask.modal .pui-box, .pui-mask.input .pui-box {
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: .05rem;
+    box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.5);
+    /*width:80%;*/
+    min-width: 5rem;
+    max-width: 5rem;
+    font-size: .16rem;
+    overflow: hidden;
+    apple-user-select: none;
+    khtml-user-select: none;
+    moz-user-select: none;
+    ms-user-select: none;
+    webkit-user-select: none;
+    user-select: none; }
+    .pui-mask.modal .pui-box .pui-title, .pui-mask.input .pui-box .pui-title {
+      line-height: .36rem;
+      height: .36rem;
+      font-size: .12rem;
+      padding: 0 .15rem;
+      color: #888888; }
+      .pui-mask.modal .pui-box .pui-title:empty, .pui-mask.input .pui-box .pui-title:empty {
+        display: none; }
+      #poe-mask.movable .pui-mask.modal .pui-box .pui-title, #poe-mask.movable .pui-mask.input .pui-box .pui-title {
+        cursor: move; }
+    .pui-mask.modal .pui-box .pui-body, .pui-mask.input .pui-box .pui-body {
+      padding: 0 .15rem;
+      display: table;
+      min-height: .8rem;
+      width: 100%; }
+    .pui-mask.modal .pui-box .pui-foot .dlg-btn, .pui-mask.input .pui-box .pui-foot .dlg-btn {
+      background-color: transparent;
+      line-height: .36rem;
+      height: .36rem;
+      border: none;
+      outline: none;
+      font-size: .16rem; }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn[disabled], .pui-mask.input .pui-box .pui-foot .dlg-btn[disabled] {
+        background-color: rgba(0, 0, 0, 0.05) !important;
+        color: #888 !important;
+        cursor: not-allowed; }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn:hover, .pui-mask.input .pui-box .pui-foot .dlg-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1); }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn:active, .pui-mask.input .pui-box .pui-foot .dlg-btn:active {
+        background-color: rgba(0, 0, 0, 0.2); }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn.pui-confirm, .pui-mask.input .pui-box .pui-foot .dlg-btn.pui-confirm {
+        color: #4e97d9; }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn.pui-cancel, .pui-mask.input .pui-box .pui-foot .dlg-btn.pui-cancel {
+        color: #F96868; }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn.pui-abort, .pui-mask.input .pui-box .pui-foot .dlg-btn.pui-abort {
+        color: #76838f; }
+      .pui-mask.modal .pui-box .pui-foot .dlg-btn:empty, .pui-mask.input .pui-box .pui-foot .dlg-btn:empty {
+        display: none; }
+  .pui-mask.input .pui-box .pui-body {
+    min-height: auto; }
+    .pui-mask.input .pui-box .pui-body .flex-row {
+      margin: .1rem auto;
+      border-radius: .05rem; }
+      .pui-mask.input .pui-box .pui-body .flex-row textarea, .pui-mask.input .pui-box .pui-body .flex-row input {
         outline: none;
-        font-size: .16rem; }
-        .poe-mask .inner .box.modal .foot .dlg-btn[disabled], .poe-mask .inner .box.input .foot .dlg-btn[disabled] {
-          background-color: rgba(0, 0, 0, 0.05) !important;
-          color: #888 !important;
-          cursor: not-allowed; }
-        .poe-mask .inner .box.modal .foot .dlg-btn:hover, .poe-mask .inner .box.input .foot .dlg-btn:hover {
-          background-color: rgba(0, 0, 0, 0.1); }
-        .poe-mask .inner .box.modal .foot .dlg-btn:active, .poe-mask .inner .box.input .foot .dlg-btn:active {
-          background-color: rgba(0, 0, 0, 0.2); }
-        .poe-mask .inner .box.modal .foot .dlg-btn.confirm, .poe-mask .inner .box.input .foot .dlg-btn.confirm {
-          color: #4e97d9; }
-        .poe-mask .inner .box.modal .foot .dlg-btn.cancel, .poe-mask .inner .box.input .foot .dlg-btn.cancel {
-          color: #F96868; }
-        .poe-mask .inner .box.modal .foot .dlg-btn.abort, .poe-mask .inner .box.input .foot .dlg-btn.abort {
-          color: #76838f; }
-        .poe-mask .inner .box.modal .foot .dlg-btn:empty, .poe-mask .inner .box.input .foot .dlg-btn:empty {
-          display: none; }
-    .poe-mask .inner .box.input .body {
-      min-height: auto; }
-      .poe-mask .inner .box.input .body .inner .flex-row {
-        margin: .1rem auto;
+        border: .01rem solid #b1b1b1;
         border-radius: .05rem; }
-        .poe-mask .inner .box.input .body .inner .flex-row textarea, .poe-mask .inner .box.input .body .inner .flex-row input {
-          outline: none;
-          border: .01rem solid #b1b1b1;
-          border-radius: .05rem; }
-        .poe-mask .inner .box.input .body .inner .flex-row input {
-          line-height: .3rem;
-          /* &:not(:first-child){
-          	border-left:.01rem solid #b1b1b1;
-          } */ }
-          .poe-mask .inner .box.input .body .inner .flex-row input[type="password"] {
-            position: absolute;
-            /* border:none;
-            border-radius:0;
-            height:.34rem;
-            font-size:2em;
-            text-align:center;
-            color:transparent;
-            text-shadow:0 0 0 #414141; */
-            opacity: 0; }
-        .poe-mask .inner .box.input .body .inner .flex-row .add, .poe-mask .inner .box.input .body .inner .flex-row .sub {
-          width: .5rem; }
-        .poe-mask .inner .box.input .body .inner .flex-row .pwd-item {
-          height: .34rem;
-          line-height: .34rem;
-          margin: 0 .05rem;
-          border-bottom: .04rem solid #414141; }
-          .poe-mask .inner .box.input .body .inner .flex-row .pwd-item:not(:empty) {
-            border-bottom: none; }
-      .poe-mask .inner .box.input .body .inner textarea {
-        margin: .1rem 0; }
-      .poe-mask .inner .box.input .body .inner .verif {
-        height: 0;
-        overflow: hidden;
-        line-height: .4rem;
-        transition: height .2s ease-in-out; }
-        .poe-mask .inner .box.input .body .inner .verif .flash {
-          margin: 0;
-          padding: 0;
-          height: 100%; }
-        .poe-mask .inner .box.input .body .inner .verif.show {
-          height: .4rem; }
-    .poe-mask .inner .box.input .title + .body {
-      padding-top: .2rem; }
-    .poe-mask .inner .box.toast, .poe-mask .inner .box.loading {
-      margin: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: .1rem;
-      padding: .1rem;
-      width: 1.3rem;
-      height: 1.3rem; }
-      .poe-mask .inner .box.toast .spinner, .poe-mask .inner .box.loading .spinner {
-        position: relative;
-        margin: .1rem auto;
-        display: block;
-        height: .6rem;
-        width: .8rem; }
-        .poe-mask .inner .box.toast .spinner .scale, .poe-mask .inner .box.loading .spinner .scale {
-          width: 4%;
-          height: calc(100% / 6);
-          background-color: #fff;
-          position: absolute;
-          border-radius: .015rem;
-          left: 48%;
-          top: calc(100% / 6);
-          transform-origin: 50% 200%;
-          -o-animation: ani-opacity 0.6s linear infinite;
-          -ms-animation: ani-opacity 0.6s linear infinite;
-          -moz-animation: ani-opacity 0.6s linear infinite;
-          -webkit-animation: ani-opacity 0.6s linear infinite;
-          animation: ani-opacity 0.6s linear infinite; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(1), .poe-mask .inner .box.loading .spinner .scale:nth-child(1) {
-            transform: rotate(-30deg);
-            -webkit-animation-delay: -0.05s;
-            -moz-animation-delay: -0.05s;
-            -ms-animation-delay: -0.05s;
-            -o-animation-delay: -0.05s;
-            animation-delay: -0.05s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(2), .poe-mask .inner .box.loading .spinner .scale:nth-child(2) {
-            transform: rotate(-60deg);
-            -webkit-animation-delay: -0.1s;
-            -moz-animation-delay: -0.1s;
-            -ms-animation-delay: -0.1s;
-            -o-animation-delay: -0.1s;
-            animation-delay: -0.1s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(3), .poe-mask .inner .box.loading .spinner .scale:nth-child(3) {
-            transform: rotate(-90deg);
-            -webkit-animation-delay: -0.15s;
-            -moz-animation-delay: -0.15s;
-            -ms-animation-delay: -0.15s;
-            -o-animation-delay: -0.15s;
-            animation-delay: -0.15s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(4), .poe-mask .inner .box.loading .spinner .scale:nth-child(4) {
-            transform: rotate(-120deg);
-            -webkit-animation-delay: -0.2s;
-            -moz-animation-delay: -0.2s;
-            -ms-animation-delay: -0.2s;
-            -o-animation-delay: -0.2s;
-            animation-delay: -0.2s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(5), .poe-mask .inner .box.loading .spinner .scale:nth-child(5) {
-            transform: rotate(-150deg);
-            -webkit-animation-delay: -0.25s;
-            -moz-animation-delay: -0.25s;
-            -ms-animation-delay: -0.25s;
-            -o-animation-delay: -0.25s;
-            animation-delay: -0.25s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(6), .poe-mask .inner .box.loading .spinner .scale:nth-child(6) {
-            transform: rotate(-180deg);
-            -webkit-animation-delay: -0.3s;
-            -moz-animation-delay: -0.3s;
-            -ms-animation-delay: -0.3s;
-            -o-animation-delay: -0.3s;
-            animation-delay: -0.3s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(7), .poe-mask .inner .box.loading .spinner .scale:nth-child(7) {
-            transform: rotate(-210deg);
-            -webkit-animation-delay: -0.35s;
-            -moz-animation-delay: -0.35s;
-            -ms-animation-delay: -0.35s;
-            -o-animation-delay: -0.35s;
-            animation-delay: -0.35s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(8), .poe-mask .inner .box.loading .spinner .scale:nth-child(8) {
-            transform: rotate(-240deg);
-            -webkit-animation-delay: -0.4s;
-            -moz-animation-delay: -0.4s;
-            -ms-animation-delay: -0.4s;
-            -o-animation-delay: -0.4s;
-            animation-delay: -0.4s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(9), .poe-mask .inner .box.loading .spinner .scale:nth-child(9) {
-            transform: rotate(-270deg);
-            -webkit-animation-delay: -0.45s;
-            -moz-animation-delay: -0.45s;
-            -ms-animation-delay: -0.45s;
-            -o-animation-delay: -0.45s;
-            animation-delay: -0.45s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(10), .poe-mask .inner .box.loading .spinner .scale:nth-child(10) {
-            transform: rotate(-300deg);
-            -webkit-animation-delay: -0.5s;
-            -moz-animation-delay: -0.5s;
-            -ms-animation-delay: -0.5s;
-            -o-animation-delay: -0.5s;
-            animation-delay: -0.5s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(11), .poe-mask .inner .box.loading .spinner .scale:nth-child(11) {
-            transform: rotate(-330deg);
-            -webkit-animation-delay: -0.55s;
-            -moz-animation-delay: -0.55s;
-            -ms-animation-delay: -0.55s;
-            -o-animation-delay: -0.55s;
-            animation-delay: -0.55s; }
-          .poe-mask .inner .box.toast .spinner .scale:nth-child(12), .poe-mask .inner .box.loading .spinner .scale:nth-child(12) {
-            transform: rotate(-360deg);
-            -webkit-animation-delay: -0.6s;
-            -moz-animation-delay: -0.6s;
-            -ms-animation-delay: -0.6s;
-            -o-animation-delay: -0.6s;
-            animation-delay: -0.6s; }
-        .poe-mask .inner .box.toast .spinner.pfont.large:before, .poe-mask .inner .box.loading .spinner.pfont.large:before {
-          display: block;
-          text-align: center;
-          color: #fff;
-          font-size: 4em;
-          line-height: .6rem; }
-        .poe-mask .inner .box.toast .spinner.pfont.large.success:before, .poe-mask .inner .box.loading .spinner.pfont.large.success:before {
-          content: "\e62c"; }
-        .poe-mask .inner .box.toast .spinner.pfont.large.warn:before, .poe-mask .inner .box.loading .spinner.pfont.large.warn:before {
-          content: "\e60c"; }
-        .poe-mask .inner .box.toast .spinner.pfont.large.error:before, .poe-mask .inner .box.loading .spinner.pfont.large.error:before {
-          content: "\e624"; }
-        .poe-mask .inner .box.toast .spinner.pfont.large.info:before, .poe-mask .inner .box.loading .spinner.pfont.large.info:before {
-          content: "\e625"; }
-      .poe-mask .inner .box.toast .txt, .poe-mask .inner .box.loading .txt {
-        font-size: .16rem;
-        color: #fff;
+      .pui-mask.input .pui-box .pui-body .flex-row input {
         line-height: .3rem;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden; }
-  .poe-mask.mask {
+        /* &:not(:first-child){
+        	border-left:.01rem solid #b1b1b1;
+        } */ }
+        .pui-mask.input .pui-box .pui-body .flex-row input[type="password"] {
+          position: absolute;
+          /* border:none;
+          border-radius:0;
+          height:.34rem;
+          font-size:2em;
+          text-align:center;
+          color:transparent;
+          text-shadow:0 0 0 #414141; */
+          opacity: 0; }
+      .pui-mask.input .pui-box .pui-body .flex-row .add, .pui-mask.input .pui-box .pui-body .flex-row .sub {
+        width: .5rem; }
+      .pui-mask.input .pui-box .pui-body .flex-row .pwd-item {
+        height: .34rem;
+        line-height: .34rem;
+        margin: 0 .05rem;
+        border-bottom: .04rem solid #414141; }
+        .pui-mask.input .pui-box .pui-body .flex-row .pwd-item:not(:empty) {
+          border-bottom: none; }
+    .pui-mask.input .pui-box .pui-body textarea {
+      margin: .1rem 0; }
+    .pui-mask.input .pui-box .pui-body .verif {
+      height: 0;
+      overflow: hidden;
+      line-height: .4rem;
+      transition: height .2s ease-in-out; }
+      .pui-mask.input .pui-box .pui-body .verif .flash {
+        margin: 0;
+        padding: 0;
+        height: 100%; }
+      .pui-mask.input .pui-box .pui-body .verif.show {
+        height: .4rem; }
+  .pui-mask.input .pui-box .pui-title + .pui-body {
+    padding-top: .2rem; }
+  .pui-mask.toast .pui-box, .pui-mask.loading .pui-box {
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: .1rem;
+    padding: .1rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: table; }
+    .pui-mask.toast .pui-box .pui-spinner, .pui-mask.loading .pui-box .pui-spinner {
+      position: relative;
+      margin: .1rem auto;
+      display: block;
+      height: .6rem;
+      width: .8rem; }
+      .pui-mask.toast .pui-box .pui-spinner .pui-scale, .pui-mask.loading .pui-box .pui-spinner .pui-scale {
+        width: 4%;
+        height: calc(100% / 6);
+        background-color: #fff;
+        position: absolute;
+        border-radius: .015rem;
+        left: 48%;
+        top: calc(100% / 6);
+        transform-origin: 50% 200%;
+        -o-animation: ani-opacity 0.6s linear infinite;
+        -ms-animation: ani-opacity 0.6s linear infinite;
+        -moz-animation: ani-opacity 0.6s linear infinite;
+        -webkit-animation: ani-opacity 0.6s linear infinite;
+        animation: ani-opacity 0.6s linear infinite; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(1), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(1) {
+          transform: rotate(-30deg);
+          -webkit-animation-delay: -0.05s;
+          -moz-animation-delay: -0.05s;
+          -ms-animation-delay: -0.05s;
+          -o-animation-delay: -0.05s;
+          animation-delay: -0.05s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(2), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(2) {
+          transform: rotate(-60deg);
+          -webkit-animation-delay: -0.1s;
+          -moz-animation-delay: -0.1s;
+          -ms-animation-delay: -0.1s;
+          -o-animation-delay: -0.1s;
+          animation-delay: -0.1s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(3), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(3) {
+          transform: rotate(-90deg);
+          -webkit-animation-delay: -0.15s;
+          -moz-animation-delay: -0.15s;
+          -ms-animation-delay: -0.15s;
+          -o-animation-delay: -0.15s;
+          animation-delay: -0.15s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(4), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(4) {
+          transform: rotate(-120deg);
+          -webkit-animation-delay: -0.2s;
+          -moz-animation-delay: -0.2s;
+          -ms-animation-delay: -0.2s;
+          -o-animation-delay: -0.2s;
+          animation-delay: -0.2s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(5), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(5) {
+          transform: rotate(-150deg);
+          -webkit-animation-delay: -0.25s;
+          -moz-animation-delay: -0.25s;
+          -ms-animation-delay: -0.25s;
+          -o-animation-delay: -0.25s;
+          animation-delay: -0.25s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(6), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(6) {
+          transform: rotate(-180deg);
+          -webkit-animation-delay: -0.3s;
+          -moz-animation-delay: -0.3s;
+          -ms-animation-delay: -0.3s;
+          -o-animation-delay: -0.3s;
+          animation-delay: -0.3s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(7), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(7) {
+          transform: rotate(-210deg);
+          -webkit-animation-delay: -0.35s;
+          -moz-animation-delay: -0.35s;
+          -ms-animation-delay: -0.35s;
+          -o-animation-delay: -0.35s;
+          animation-delay: -0.35s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(8), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(8) {
+          transform: rotate(-240deg);
+          -webkit-animation-delay: -0.4s;
+          -moz-animation-delay: -0.4s;
+          -ms-animation-delay: -0.4s;
+          -o-animation-delay: -0.4s;
+          animation-delay: -0.4s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(9), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(9) {
+          transform: rotate(-270deg);
+          -webkit-animation-delay: -0.45s;
+          -moz-animation-delay: -0.45s;
+          -ms-animation-delay: -0.45s;
+          -o-animation-delay: -0.45s;
+          animation-delay: -0.45s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(10), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(10) {
+          transform: rotate(-300deg);
+          -webkit-animation-delay: -0.5s;
+          -moz-animation-delay: -0.5s;
+          -ms-animation-delay: -0.5s;
+          -o-animation-delay: -0.5s;
+          animation-delay: -0.5s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(11), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(11) {
+          transform: rotate(-330deg);
+          -webkit-animation-delay: -0.55s;
+          -moz-animation-delay: -0.55s;
+          -ms-animation-delay: -0.55s;
+          -o-animation-delay: -0.55s;
+          animation-delay: -0.55s; }
+        .pui-mask.toast .pui-box .pui-spinner .pui-scale:nth-child(12), .pui-mask.loading .pui-box .pui-spinner .pui-scale:nth-child(12) {
+          transform: rotate(-360deg);
+          -webkit-animation-delay: -0.6s;
+          -moz-animation-delay: -0.6s;
+          -ms-animation-delay: -0.6s;
+          -o-animation-delay: -0.6s;
+          animation-delay: -0.6s; }
+      .pui-mask.toast .pui-box .pui-spinner.icon, .pui-mask.loading .pui-box .pui-spinner.icon {
+        width: .6rem; }
+    .pui-mask.toast .pui-box .pui-content, .pui-mask.loading .pui-box .pui-content {
+      font-size: .16rem;
+      color: #fff;
+      line-height: .3rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden; }
+  .pui-mask.mask {
     background-color: rgba(0, 0, 0, 0.5); }
-  .poe-mask.hiding.anim {
+  .pui-mask.hiding.anim {
     display: table;
     -webkit-animation: fadeOut .2s .1s ease-in-out both;
     animation: fadeOut .2s .1s ease-in-out both; }
-    .poe-mask.hiding.anim .box {
+    .pui-mask.hiding.anim .pui-box {
       -webkit-animation: zoomOut .2s ease-in-out both;
       animation: zoomOut .2s ease-in-out both; }
-  .poe-mask.showing {
+  .pui-mask.showing {
     display: table; }
-    .poe-mask.showing.anim {
+    .pui-mask.showing.anim {
       -webkit-animation: fadeIn .2s ease-in-out both;
       animation: fadeIn .2s ease-in-out both; }
-      .poe-mask.showing.anim .box {
+      .pui-mask.showing.anim .pui-box {
         -webkit-animation: zoomIn .2s .1s ease-in-out both;
         animation: zoomIn .2s .1s ease-in-out both; }
 

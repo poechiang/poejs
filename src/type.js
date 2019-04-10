@@ -4,7 +4,11 @@ define([
 	'./core/isWindow',
 	'./core/isFunction',
 	'./core/isArrayLike',
-	'./core/isPlainObject'
+	'./core/isPlainObject',
+
+	'./type/array',
+	'./type/string',
+	'./type/date'
 ], function (POE, toType, isWindow, isFunction, isArrayLike, isPlainObject) {
 
 	'use strict'

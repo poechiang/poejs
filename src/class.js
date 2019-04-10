@@ -175,24 +175,51 @@ define([
 
 			return false
 		},
-		class:function(selector,delay){
+		class:function(selector,delay,fn){
 			if (POE.isString(selector)) {
 				selector = [selector]
 			}
 			var has,that = this
+
+			if (POE.isFunction(delay)) {
+				fn = delay
+				delay = 0
+			}
+			fn = fn || POE.noop
+
 			POE.each(selector,function(sel){
+
 				var op = sel[0]
 				sel = sel.slice(1).trim()
-
 				switch(op){
 					case '?':
 						has = that.hasClass(sel)
+						break
 					case '!':
-						POE.delay(that.toggleClass,delay||0,[sel],that)
+						POE.delay(function(){
+							that.toggleClass(sel)
+							fn()
+						},delay)
+						break
 					case '^':
-						POE.delay(that.removeClass,delay||0,[sel],that)
+						POE.delay(function(){
+							if (sel) {
+								that.removeClass(sel)
+							}
+							else{
+								that.removeClass()
+							}
+							
+							fn()
+						},delay)
+						break
 					default://&
-						POE.delay(that.addClass,delay||0,[op=='&'?sel:op+sel],that)
+
+						POE.delay(function(){
+							that.addClass([op=='&'?sel:op+sel])
+							fn()
+						},delay)
+						//POE.delay(that.addClass,delay||0,[op=='&'?sel:op+sel],that)
 
 				}
 			})

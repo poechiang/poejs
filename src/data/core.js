@@ -1,7 +1,8 @@
 define([
 	'../core',
 '../core/camelCase',
-	],function(POE,camelCase) {
+'../core/acceptData',
+	],function(POE,camelCase,acceptData) {
 
 	'use strict'
 

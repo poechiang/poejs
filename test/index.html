@@ -58,58 +58,16 @@
 			<article >
 				<div class="flex-row flex-wrap">
 					<button class="btn-block secondary submit m-5" >提交</button>
-					<button class="btn-block success submit-sucess m-5" >提交成功</button>
+					<button class="btn-block success submit-success m-5" >提交成功</button>
+					<button class="btn-block error submit-error m-5" >操作失败</button>
+					<button class="btn-block warning submit-warn m-5" >警告</button>
+					<button class="btn-block primary submit-info m-5" >信息</button>
 				</div>
 			</article>
 			<footer></footer>
 		</section>
-
-		<div id="poe-notify">
-			<p>操作成功！</p>
-		</div>
-		<div class="poe-mask anim mask" >
-			<div class="inner">
-				<div class="box modal">
-					<header class="title">标题</header>
-					<article class="body">
-						<p class="inner hor-center">测试测试测试测试</p>
-					</article>
-					<footer class="foot flex-row">
-						<button class="dlg-btn abort flex-item">放弃</button>
-						<button class="dlg-btn cancel flex-item">取消</button>
-						<button class="dlg-btn confirm flex-item">确定</button>
-					</footer>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="poe-mask anim mask" >
-			<div class="inner">
-				<div class="box toast">
-					<div class="inner">
-						
-					<article class="spinner">
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-						<span class="scale"></span>
-					</article>
-					<footer class="txt">正在加载…</footer>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		
+
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 		<script type="text/javascript" src="../dist/poe.2.0.1.js"></script>
 
@@ -161,6 +119,11 @@
 
 			})
 
+			$('.delay-class').click(()=>{
+				var hasDelay = $$boxpoe.class('hor-center',3000).class(['^hor-center','hor-right'],4000).class('?poe')
+				$$.con.debug(hasDelay)
+			})
+
 			$('.show-modal').click(function (){
 				$mask.addClass('showing')
 				setTimeout(()=>{
@@ -169,59 +132,37 @@
 			})
 
 			$('.show-success-notify').click(function (){
-				$('#poe-notify').addClass('success showing')
-				setTimeout(()=>{
-					$('#poe-notify').addClass('hiding')
-				},400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('success showing')
-				},3400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('hiding')
-				},3800)
+				$$.ui.notify('测试成功通知栏！！！','success')
 			})
 			$('.show-info-notify').click(function (){
-				$('#poe-notify').addClass('info showing')
-				setTimeout(()=>{
-					$('#poe-notify').addClass('hiding')
-				},400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('info showing')
-				},3400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('hiding')
-				},3800)
+				$$.ui.notify('测试信息通知栏！！！')
 			})
 			$('.show-error-notify').click(function (){
-				$('#poe-notify').addClass('error showing')
-				setTimeout(()=>{
-					$('#poe-notify').addClass('hiding')
-				},400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('error showing')
-				},3400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('hiding')
-				},3800)
+				$$.ui.notify('测试错误通知栏！！！','error')
 			})
 			$('.show-warn-notify').click(function (){
-				$('#poe-notify').addClass('warn showing')
-				setTimeout(()=>{
-					$('#poe-notify').addClass('hiding')
-				},400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('warn showing')
-				},3400)
-				setTimeout(()=>{
-					$('#poe-notify').removeClass('hiding')
-				},3800)
+				$$.ui.notify('测试警告通知栏！！！','warn')
 			})
 
-			$('.delay-class').click(()=>{
-				var hasDelay = $$boxpoe.class('hor-center',3000).class(['^hor-center','hor-right'],4000).class('?poe')
-				$$.con.debug(hasDelay)
-			})
 
+			$('.submit').click(()=>{
+				$$.ui.loading('正在加载')
+				$$.delay(()=>{
+					$$.ui.loading()
+				},5000)
+			})
+			$('.submit-success').click(()=>{
+				$$.ui.toast('操作成功')
+			})
+			$('.submit-error').click(()=>{
+				$$.ui.toast('操作失败','error')
+			})
+			$('.submit-warn').click(()=>{
+				$$.ui.toast('出现异常','warn')
+			})
+			$('.submit-info').click(()=>{
+				$$.ui.toast('48s','info')
+			})
 
 
 			console.log($content,$$content)

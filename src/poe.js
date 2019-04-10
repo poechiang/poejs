@@ -1,15 +1,19 @@
 define([
 	'./core',
-	'./selector',
+	'./attr',
 	'./callbacks',
 	'./class',
 	'./console',
 	'./css',
+	'./data',
 	'./dom',
 	'./event',
 	'./deferred',
+	'./prop',
+	'./sizzle',
 	'./support',
 	'./type',
+	'./ui',
 ], function(POE) {
 	'use strict'
 
@@ -70,6 +74,14 @@ define([
 
 
 	try {
+
+
+
+		var win = window
+		POE.createObjectURL = window.createObjectURL || window.URL && window.URL.createObjectURL || window.webkitURL && window.webkitURL.createObjectURL
+
+
+
 		POE.con.info('欢迎使用POE前端框架\n框架作者： \t\thttps://poechiang.tech\n文档及API说明： \thttps://poejs.poechiang.tech')
 
 	} catch (e) {
