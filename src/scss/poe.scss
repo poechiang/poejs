@@ -16,80 +16,18 @@
  */
 @import 'ui';
 
-
-@font-face {
-  font-family: 'poefont';  /* project id 255476 */
-  src: url('//at.alicdn.com/t/font_255476_odgsy9eupplul3di.eot');
-  src: url('//at.alicdn.com/t/font_255476_odgsy9eupplul3di.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_255476_odgsy9eupplul3di.woff') format('woff'),
-  url('//at.alicdn.com/t/font_255476_odgsy9eupplul3di.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_255476_odgsy9eupplul3di.svg#poefont') format('svg');
-}
-
-
-
-.poefont,.pfont:before,.pfont:after{
-    font-family:"poefont" !important;
-    font-size:1.33em;
-    font-style:normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.poefont{
-  &.mini{
-    font-size:.83em;
-  }
-  &.small{
-    font-size:1em;
-  }
-  &.medium{
-    text-align:center;
-    display: block;
-    font-size:1.67em;
-  }
-  &.large{
-    text-align:center;
-    display: block;
-    font-size:2em;
-  }
-}
-.pfont{
-  &.mini{
-    &:after,&:before{
-        font-size: .83em;
-    }
-  }
-  &.small{
-    &:after,&:before{
-        font-size: 1em;
-    }
-  }
-  &.medium{
-    &:after,&:before{
-        text-align:center;
-        display: block;
-      font-size:1.67em;
-    }
-  }
-  &.large{
-    &:after,&:before{
-        text-align:center;
-        display: block;
-      font-size:2em;
-    }
-  }
-}
-
 .iconfont,.ifont:before,.ifont:after,[class*="icon-"]:before,[class*="-icon"]:after{
     font-family:"iconfont" !important;
     font-size:1.33em;
     font-style:normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    vertical-align: -.165rem;
 }
 .iconfont{
   &.mini{
     font-size:.83em;
+    vertical-align: .085rem;
   }
   &.small{
     font-size:1em;
@@ -107,7 +45,8 @@
 }
 [class*="icon-"]{
   &.mini:before{
-        font-size: .83em;
+    font-size: .83em;
+    vertical-align: .085rem;
   }
   &.small:before{
         font-size: 1em;
@@ -126,6 +65,7 @@
 [class*="-icon"]{
   &.mini:after{
     font-size: .83em;
+    vertical-align: .085rem;
   }
   &.small:after{
     font-size: 1em;

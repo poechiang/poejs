@@ -1,6 +1,6 @@
 define([
 	'./core',
-	'./var/console'
+	'./var/console',
 ], function(POE,console) {
 
 	'use strict'
@@ -94,8 +94,8 @@ define([
 				delete timeLogs[label]
 			}
 		},
-		debug:function(msg) {
-			POE.support.debug && this.log(msg)
+		debug:function() {
+			POE.support.debug && this.log.apply(this,POE.toArray(arguments))
 		},
 		trace: console.trace,
 		warn:function() {

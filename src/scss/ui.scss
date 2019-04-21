@@ -146,7 +146,8 @@
 		.pui-foot{
 			.dlg-btn{
 				background-color:transparent;
-				line-height: .36rem;
+				line-height: .28rem;
+				padding:.04rem .12rem;
 				height: .36rem;
 				border:none;
 				outline: none;
@@ -162,18 +163,22 @@
 				&:active{
 					background-color:rgba(0,0,0,.2);
 				}
-				&.pui-confirm{
+				&.pui-btn-confirm{
 					color:#4e97d9;
 				}
-				&.pui-cancel{
+				&.pui-btn-cancel{
 					color:#F96868;
 				}
-				&.pui-abort{
+				&.pui-btn-abort{
 					color:#76838f;
 				}
 				&:empty{
 					display: none;
 				}
+			}
+
+			&:empty{
+				display: none;
 			}
 		}
 	}

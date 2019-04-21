@@ -1,9 +1,8 @@
 define([
 	'./core',
-	'./core/isFunction',
 	'./core/stripAndCollapse',
 	'./var/rnothtmlwhite',
-], function(POE, isFunction, stripAndCollapse,rnothtmlwhite) {
+], function(POE, stripAndCollapse,rnothtmlwhite) {
 	'use strict'
 
 	var getClass = function(elem) {
@@ -27,7 +26,7 @@ define([
 			var classes, elem, cur, curValue, clazz, j, finalValue,
 				i = 0
 
-			if (isFunction(value)) {
+			if (POE.isFunction(value)) {
 				return this.each(function(j) {
 					POE(this).addClass(value.call(this, getClass(this)))
 				})
@@ -64,7 +63,7 @@ define([
 			var classes, elem, cur, curValue, clazz, j, finalValue,
 				i = 0
 
-			if (isFunction(value)) {
+			if (POE.isFunction(value)) {
 				return this.each(function(j) {
 					POE(this).removeClass(value.call(this, getClass(this)))
 				})
@@ -113,7 +112,7 @@ define([
 				return stateVal ? this.addClass(value) : this.removeClass(value)
 			}
 
-			if (isFunction(value)) {
+			if (POE.isFunction(value)) {
 				return this.each(function(i) {
 					POE(this).toggleClass(
 						value.call(this, getClass(this), stateVal),

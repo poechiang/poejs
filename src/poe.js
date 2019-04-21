@@ -1,6 +1,11 @@
 define([
 	'./core',
+	'./support',
+	'./type',
+	'./sizzle',
+
 	'./attr',
+	'./cache',
 	'./callbacks',
 	'./class',
 	'./console',
@@ -9,10 +14,10 @@ define([
 	'./dom',
 	'./event',
 	'./deferred',
+	'./json',
+	'./md5',
 	'./prop',
-	'./sizzle',
-	'./support',
-	'./type',
+	'./http',
 	'./ui',
 ], function(POE) {
 	'use strict'

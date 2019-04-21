@@ -1,0 +1,12 @@
+@charset 'utf-8';
+a,
+a:link{
+	color:#62A8EA;
+}
+a:hover{
+	color:#89BCEB;
+}
+a:active{
+	color:#4E97D9;
+}
+

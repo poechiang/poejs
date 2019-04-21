@@ -11,163 +11,47 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>项目测试|poejs</title>
 		<link rel="stylesheet" type="text/css" href="../dist/poe.2.0.1.css">
+		<link rel="stylesheet" type="text/css" href="./test/css/main.css">
 		<style type="text/css">
-			.ml-item{
-				margin-top:.1rem;
+			.pui-block{
+				font-size: .16rem;
+
 			}
-			.ml-item:first-child,.ml-title+.ml-item,.ml-head+.ml-item{
-				margin-top: .01rem;
+			label.data-label{
+				min-width: 1rem;
+			}
+			input[type="text"],output{
+				line-height: .32rem;
+				height: .34rem;
+
 			}
 		</style>
     </head>
 	<body>
-		<section class="pui-block">
-			<header class="pui-block-title">jQuery & POE</header>
-			<article>
-				<button class="btn-block delay-class f-right">延迟三秒</button>
-				<div class="box jq">this is a jquery box</div>
-				<div class="box poe">this is a poe box</div>
-			</article>
-			<footer></footer>
-		</section>
-
-
-		<section class="pui-block">
-			<header class="pui-block-title">POE.ui 模态对话框</header>
-			<article>
-				<button class="btn-block show-modal" >显示模态对话框</button>
-			</article>
-			<footer></footer>
-		</section>
-
-		<section class="pui-block">
-			<header class="pui-block-title">POE.ui 通知栏</header>
-			<article >
-				<div class="flex-row flex-wrap">
-					<button class="btn-block success show-success-notify m-5" >显示成功通知栏</button>
-					<button class="btn-block error show-error-notify m-5" >显示错误通知栏</button>
-					<button class="btn-block secondary show-info-notify m-5" >显示信息通知栏</button>
-					<button class="btn-block warning show-warn-notify m-5" >显示警告通知栏</button>
-				</div>
-			</article>
-			<footer></footer>
-		</section>
-
-		<section class="pui-block">
-			<header class="pui-block-title">POE.ui Toast</header>
-			<article >
-				<div class="flex-row flex-wrap">
-					<button class="btn-block secondary submit m-5" >提交</button>
-					<button class="btn-block success submit-success m-5" >提交成功</button>
-					<button class="btn-block error submit-error m-5" >操作失败</button>
-					<button class="btn-block warning submit-warn m-5" >警告</button>
-					<button class="btn-block primary submit-info m-5" >信息</button>
-				</div>
-			</article>
-			<footer></footer>
-		</section>
-		
-
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-		<script type="text/javascript" src="../dist/poe.2.0.1.js"></script>
-
-
-		<script type="text/javascript">
-			
-			let $content = $('#page-content'),
-				$$content = $$('#page-content'),
-				$boxjq = $('.box.jq'),
-				$$boxpoe = $$('.box.poe')
-
-
-			$boxjq.css({color:'red'})
-			$$boxpoe.css({color:'green'}).css('background-color','white')
-
-
-			let $mask = $('.poe-mask'),
-				$box = $mask.find('.box'),
-				$$mask = $$('.poe-mask'),
-				$$box = $$mask.find('.box')
-			if ($mask.is('.movable')) {
-				$mask.off('mousedown').on('mousedown',(e)=>{
-					if ($(e.target).is('.title')) {
-						console.log(e)
-						$mask.data({org:{left:e.offsetX,top:e.offsetY}})
-					}
-				})
-				$mask.off('mousemove').on('mousemove',(e)=>{
-					let org = $mask.data().org
-					org && $box.offset({left:e.clientX-org.left,top:e.clientY - org.top})
-					
-				})
-
-				$mask.off('mouseup').on('mouseup',(e)=>{
-					let data = $mask.data()
-					delete data.org
-					$mask.data(data)
-				})
-
-			}
-
-
-			$box.on('click','.dlg-btn',(e)=>{
+		<dl class="pui-mlist">
+			<dt class="pui-ml-title"> poejs issue</dt>
+			<dd class="pui-ml-item more"><a class="dp-block" href="test/ui.html">POE UI</a></dd>
+			<dd class="pui-ml-item more"><a class="dp-block" href="test/ajax.html">POE AJAX</a></dd>
+			<dd class="pui-ml-item more"><a class="dp-block" href="test/json.html">POE JSON</a></dd>
+			<dd class="pui-ml-item more"><a class="dp-block" href="test/cache.html">POE Cache</a></dd>
+		</dl>
+		<!-- <section class="block1 pui-block">
+			<header class="pui-block-title">POE.cache 存储</header>
+			<article class="box pui-block-body">
 				
-				$mask.removeClass('showing')
-				setTimeout(()=>{
-					$mask.removeClass('hiding')
-				},400)
+				要缓存的数据：<br><br>
+				<label class="data-label mr-10">键名</label><input type="text" class="key" ><br><br>
+				 <label class="data-label mr-10">键值</label><input type="text" class="value" >
 
-			})
-
-			$('.delay-class').click(()=>{
-				var hasDelay = $$boxpoe.class('hor-center',3000).class(['^hor-center','hor-right'],4000).class('?poe')
-				$$.con.debug(hasDelay)
-			})
-
-			$('.show-modal').click(function (){
-				$mask.addClass('showing')
-				setTimeout(()=>{
-					$mask.addClass('hiding')
-				},400)
-			})
-
-			$('.show-success-notify').click(function (){
-				$$.ui.notify('测试成功通知栏！！！','success')
-			})
-			$('.show-info-notify').click(function (){
-				$$.ui.notify('测试信息通知栏！！！')
-			})
-			$('.show-error-notify').click(function (){
-				$$.ui.notify('测试错误通知栏！！！','error')
-			})
-			$('.show-warn-notify').click(function (){
-				$$.ui.notify('测试警告通知栏！！！','warn')
-			})
-
-
-			$('.submit').click(()=>{
-				$$.ui.loading('正在加载')
-				$$.delay(()=>{
-					$$.ui.loading()
-				},5000)
-			})
-			$('.submit-success').click(()=>{
-				$$.ui.toast('操作成功')
-			})
-			$('.submit-error').click(()=>{
-				$$.ui.toast('操作失败','error')
-			})
-			$('.submit-warn').click(()=>{
-				$$.ui.toast('出现异常','warn')
-			})
-			$('.submit-info').click(()=>{
-				$$.ui.toast('48s','info')
-			})
-
-
-			console.log($content,$$content)
-			console.log($mask,$$mask,$box,$$box)
-
+				<button class="btn-block clear m-5 warn" >清除</button>
+			</article>
+			<footer class="pui-block-foot flex-row flex-main-end flex-wrap">
+				<button class="btn-block locale m-5 primary" >存至locale</button>
+				<button class="btn-block session m-5 secondary" >存至session</button>
+			</footer>
+		</section> -->
+		<script type="text/javascript" src="../dist/poe.2.0.1.js"></script>
+		<script type="text/javascript">
 		</script>
 	</body>
 </html>

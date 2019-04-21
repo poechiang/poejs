@@ -1,8 +1,9 @@
 define([
-'../core/extend',
-'./returnTrue',
-'./returnFalse',
-	],function(extend,returnTrue,returnFalse) {
+	'../var/expando',
+	'../core/extend',
+	'./returnTrue',
+	'./returnFalse',
+], function(expando, extend, returnTrue, returnFalse) {
 	'use strict'
 
 	var Event = function(src, props) {
@@ -49,9 +50,8 @@ define([
 
 		// Create a timestamp if incoming event doesn't have one
 		this.timeStamp = src && src.timeStamp || Date.now()
-
 		// Mark it as fixed
-		this[POE.expando] = true
+		this[expando] = true
 	}
 
 	// POE.Event is based on DOM3 Events as specified by the ECMAScript Language Binding

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta content="always" name="referrer">
+		<meta name="author" content="Poe Chiang">
+		<meta name="generator" content="sublime text">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>项目测试|poejs</title>
+		<link rel="stylesheet" type="text/css" href="../dist/poe.2.0.1.css">
+    </head>
+	<body>
+		<section class="pui-block">
+			<header class="pui-block-title">jQuery & POE</header>
+			<article class="pui-block-body">
+				<button class="btn-block delay-class f-right">延迟三秒</button>
+				<div class="box jq">this is a jquery box</div>
+				<div class="box poe">this is a poe box</div>
+			</article>
+			<footer></footer>
+		</section>
+
+		<section class="pui-block">
+			<header class="pui-block-title">POE.ui Modal 模态对话框</header>
+			<article class="pui-block-body">
+				<div class="flex-row flex-wrap">
+					<button class="btn-block show-normal-modal m-5">普通对话框</button>
+					<button class="btn-block show-auto-modal m-5 primary" >自动关闭对话框</button>
+					<button class="btn-block show-title-modal m-5 secondary" >标题栏对话框</button>
+					<button class="btn-block show-nomask-modal m-5" >无遮罩对话框</button>
+					<button class="btn-block show-one-modal m-5 " >只有一个按钮的对话框</button>
+					<button class="btn-block show-move-modal m-5 warning" >可移动对话框</button>
+					<button class="btn-block show-move2-modal m-5 warning" >无标题栏可移动对话框</button>
+					<button class="btn-block show-modal m-5" >显示模态对话框</button>
+				</div>
+			</article>
+			<footer></footer>
+		</section>
+
+		<section class="pui-block">
+			<header class="pui-block-title">POE.ui 通知栏</header>
+			<article class="pui-block-body">
+				<div class="flex-row flex-wrap">
+					<button class="btn-block success show-success-notify m-5" >显示成功通知栏</button>
+					<button class="btn-block error show-error-notify m-5" >显示错误通知栏</button>
+					<button class="btn-block secondary show-info-notify m-5" >显示信息通知栏</button>
+					<button class="btn-block warning show-warn-notify m-5" >显示警告通知栏</button>
+				</div>
+			</article>
+			<footer></footer>
+		</section>
+
+		<section class="pui-block">
+			<header class="pui-block-title">POE.ui Toast</header>
+			<article class="pui-block-body" >
+				<div class="flex-row flex-wrap">
+					<button class="btn-block secondary submit m-5" >提交</button>
+					<button class="btn-block success submit-success m-5" >提交成功</button>
+					<button class="btn-block error submit-error m-5" >操作失败</button>
+					<button class="btn-block warning submit-warn m-5" >警告</button>
+					<button class="btn-block primary submit-info m-5" >信息</button>
+				</div>
+			</article>
+			<footer></footer>
+		</section>
+		
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="../dist/poe.2.0.1.js"></script>
+
+
+		<script type="text/javascript">
+			let 
+				$$mask = $$('.poe-mask'),
+				$$box = $$mask.find('.box.poe')
+
+			$('.delay-class').click(()=>{
+				var hasDelay = $$box.class('hor-center',3000).class(['^hor-center','hor-right'],4000).class('?poe')
+				$$.con.debug(hasDelay)
+			})
+			
+
+			$('.show-normal-modal').click(function (){
+				$$.ui.modal('这是一个默认的普通对话框')
+			})
+			$('.show-auto-modal').click(function (){
+				$$.ui.modal('当对话框没有标题栏和按钮时，在指定时间 ( 默认 1.5 秒 ) 内会自动关闭！',{cancel:false,confirm:false})
+			})
+			$('.show-title-modal').click(function (){
+				$$.ui.modal('这是一个带标题栏的对话框！',{title:'标题标题'})
+			})
+			$('.show-nomask-modal').click(function (){
+				$$.ui.modal('这是一个无遮罩层的对话框！',{mask:false})
+			})
+			$('.show-one-modal').click(function (){
+				$$.ui.modal('这是一个只有一个且为定制按钮的对话框！',{cancel:false,confirm:{text:'知道了',color:'#00ff00f0'}})
+			})
+			$('.show-move-modal').click(function (){
+				$$.ui.modal('这是一个可以拖动的对话框！',{title:{text:'移动对话框标题栏',align:'left'},movable:true})
+			})
+
+			$('.show-move2-modal').click(function (){
+				$$.ui.modal('对话框无标题栏时，可以拖动对话框本身移动！',{movable:true})
+			})
+
+			$('.show-success-notify').click(function (){
+				$$.ui.notify('测试成功通知栏！！！','success')
+			})
+			$('.show-info-notify').click(function (){
+				$$.ui.notify('测试信息通知栏！！！')
+			})
+			$('.show-error-notify').click(function (){
+				$$.ui.notify('测试错误通知栏！！！','error')
+			})
+			$('.show-warn-notify').click(function (){
+				$$.ui.notify('测试警告通知栏！！！','warn')
+			})
+
+
+			$('.submit').click(()=>{
+				$$.ui.loading('正在加载')
+				$$.delay(()=>{
+					$$.ui.loading()
+				},5000)
+			})
+			$('.submit-success').click(()=>{
+				$$.ui.toast('操作成功')
+			})
+			$('.submit-error').click(()=>{
+				$$.ui.toast('操作失败','error')
+			})
+			$('.submit-warn').click(()=>{
+				$$.ui.toast('出现异常','warn')
+			})
+			$('.submit-info').click(()=>{
+				$$.ui.toast('48s','info')
+			})
+
+		</script>
+	</body>
+</html>

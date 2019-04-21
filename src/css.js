@@ -5,16 +5,16 @@ define([
 		'./var/rcssNum',
 		'./var/rnumnonpx',
 		'./dom/finalPropName',
-		'./dom/var/cssHooks',
-		'./dom/var/cssNumber',
-		'./dom/getStyles'
+		'./dom/getStyles',
+		'./dom/addGetHookIf',
 	],
-	function(POE, access, camelCase,  
-		rcssNum, rnumnonpx, finalPropName,
-		cssHooks, cssNumber, getStyles) {
+	function(POE, access, camelCase, rcssNum, rnumnonpx, finalPropName, getStyles,addGetHookIf) {
 
 		'use strict'
-		var rcustomProp = /^--/,
+
+
+		var rdisplayswap = /^(none|table(?!-c[ea]).+)/,
+			rcustomProp = /^--/,
 			adjustCSS = function(elem, prop, valueParts, tween) {
 				var adjusted, scale,
 					maxIterations = 20,
@@ -26,10 +26,10 @@ define([
 						return POE.css(elem, prop, '')
 					},
 					initial = currentValue(),
-					unit = valueParts && valueParts[3] || (cssNumber[prop] ? '' : 'px'),
+					unit = valueParts && valueParts[3] || (POE.cssNumber[prop] ? '' : 'px'),
 
 					// Starting value computation is required for potential unit mismatches
-					initialInUnit = (cssNumber[prop] || unit !== 'px' && +initial) &&
+					initialInUnit = (POE.cssNumber[prop] || unit !== 'px' && +initial) &&
 					rcssNum.exec(POE.css(elem, prop))
 
 				if (initialInUnit && initialInUnit[3] !== unit) {
@@ -91,7 +91,7 @@ define([
 						ret = POE.style(elem, name)
 					}
 
-					if (!support.pixelBoxStyles() && rnumnonpx.test(ret) && rboxStyle.test(name)) {
+					if (!POE.support.pixelBoxStyles() && rnumnonpx.test(ret) && rboxStyle.test(name)) {
 
 						// Remember the original values
 						width = style.width
@@ -110,6 +110,165 @@ define([
 				}
 
 				return ret !== undefined ? ret + '' : ret
+			},
+			swap = function(elem, options, callback, args) {
+				var ret, name,
+					old = {}
+
+				// Remember the old values, and insert the new ones
+				for (name in options) {
+					old[name] = elem.style[name]
+					elem.style[name] = options[name]
+				}
+
+				ret = callback.apply(elem, args || [])
+
+				// Revert the old values
+				for (name in options) {
+					elem.style[name] = old[name]
+				}
+
+				return ret
+			},
+			setPositiveNumber=function( elem, value, subtract ) {
+
+				var matches = rcssNum.exec( value );
+				return matches ?
+					Math.max( 0, matches[ 2 ] - ( subtract || 0 ) ) + ( matches[ 3 ] || "px" ) :
+					value;
+			},
+			boxModelAdjustment = function(elem, dimension, box, isBorderBox, styles, computedVal) {
+				var i = dimension === 'width' ? 1 : 0,
+					extra = 0,
+					delta = 0;
+
+				// Adjustment may not be necessary
+				if (box === (isBorderBox ? 'border' : 'content')) {
+					return 0;
+				}
+
+				for (; i < 4; i += 2) {
+
+					// Both box models exclude margin
+					if (box === 'margin') {
+						delta += POE.css(elem, box + cssExpand[i], true, styles);
+					}
+
+					// If we get here with a content-box, we're seeking 'padding' or 'border' or 'margin'
+					if (!isBorderBox) {
+
+						// Add padding
+						delta += POE.css(elem, 'padding' + cssExpand[i], true, styles);
+
+						// For 'border' or 'margin', add border
+						if (box !== 'padding') {
+							delta += POE.css(elem, 'border' + cssExpand[i] + 'Width', true, styles);
+
+							// But still keep track of it otherwise
+						} else {
+							extra += POE.css(elem, 'border' + cssExpand[i] + 'Width', true, styles);
+						}
+
+						// If we get here with a border-box (content + padding + border), we're seeking 'content' or
+						// 'padding' or 'margin'
+					} else {
+
+						// For 'content', subtract padding
+						if (box === 'content') {
+							delta -= POE.css(elem, 'padding' + cssExpand[i], true, styles);
+						}
+
+						// For 'content' or 'padding', subtract border
+						if (box !== 'margin') {
+							delta -= POE.css(elem, 'border' + cssExpand[i] + 'Width', true, styles);
+						}
+					}
+				}
+
+				// Account for positive content-box scroll gutter when requested by providing computedVal
+				if (!isBorderBox && computedVal >= 0) {
+
+					// offsetWidth/offsetHeight is a rounded sum of content, padding, scroll gutter, and border
+					// Assuming integer scroll gutter, subtract the rest and round down
+					delta += Math.max(0, Math.ceil(
+						elem['offset' + dimension[0].toUpperCase() + dimension.slice(1)] -
+						computedVal -
+						delta -
+						extra -
+						0.5
+
+						// If offsetWidth/offsetHeight is unknown, then we can't determine content-box scroll gutter
+						// Use an explicit zero to avoid NaN (gh-3964)
+					)) || 0;
+				}
+
+				return delta;
+			},
+			getWidthOrHeight = function(elem, dimension, extra) {
+
+				// Start with computed style
+				var styles = getStyles(elem),
+
+					// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-4322).
+					// Fake content-box until we know it's needed to know the true value.
+					boxSizingNeeded = !POE.support.boxSizingReliable() || extra,
+					isBorderBox = boxSizingNeeded &&
+					POE.css(elem, 'boxSizing', false, styles) === 'border-box',
+					valueIsBorderBox = isBorderBox,
+
+					val = curCSS(elem, dimension, styles),
+					offsetProp = 'offset' + dimension[0].toUpperCase() + dimension.slice(1);
+
+				// Support: Firefox <=54
+				// Return a confounding non-pixel value or feign ignorance, as appropriate.
+				if (rnumnonpx.test(val)) {
+					if (!extra) {
+						return val;
+					}
+					val = 'auto';
+				}
+
+
+				// Fall back to offsetWidth/offsetHeight when value is 'auto'
+				// This happens for inline elements with no explicit setting (gh-3571)
+				// Support: Android <=4.1 - 4.3 only
+				// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
+				// Support: IE 9-11 only
+				// Also use offsetWidth/offsetHeight for when box sizing is unreliable
+				// We use getClientRects() to check for hidden/disconnected.
+				// In those cases, the computed value can be trusted to be border-box
+				if ((!POE.support.boxSizingReliable() && isBorderBox ||
+						val === 'auto' ||
+						!parseFloat(val) && POE.css(elem, 'display', false, styles) === 'inline') &&
+					elem.getClientRects().length) {
+
+					isBorderBox = POE.css(elem, 'boxSizing', false, styles) === 'border-box';
+
+					// Where available, offsetWidth/offsetHeight approximate border box dimensions.
+					// Where not available (e.g., SVG), assume unreliable box-sizing and interpret the
+					// retrieved value as a content box dimension.
+					valueIsBorderBox = offsetProp in elem;
+					if (valueIsBorderBox) {
+						val = elem[offsetProp];
+					}
+				}
+
+				// Normalize '' and auto
+				val = parseFloat(val) || 0;
+
+				// Adjust for the element's box model
+				return (val +
+					boxModelAdjustment(
+						elem,
+						dimension,
+						extra || (isBorderBox ? 'border' : 'content'),
+						valueIsBorderBox,
+						styles,
+
+						// Provide the current computed size to request scroll gutter calculation (gh-3589)
+						val
+					)
+				) + 'px';
 			}
 
 		POE.extend({
@@ -134,7 +293,7 @@ define([
 				}
 
 				// Gets hook for the prefixed version, then unprefixed version
-				hooks = cssHooks[name] || cssHooks[origName]
+				hooks = POE.cssHooks[name] || POE.cssHooks[origName]
 
 				// Check if we're setting a value
 				if (value !== undefined) {
@@ -155,11 +314,11 @@ define([
 
 					// If a number was passed in, add the unit (except for certain CSS properties)
 					if (type === 'number') {
-						value += ret && ret[3] || (cssNumber[origName] ? '' : 'px')
+						value += ret && ret[3] || (POE.cssNumber[origName] ? '' : 'px')
 					}
 
 					// background-* props affect original clone's values
-					if (!support.clearCloneStyle && value === '' && name.indexOf('background') === 0) {
+					if (!POE.support.clearCloneStyle && value === '' && name.indexOf('background') === 0) {
 						style[name] = 'inherit'
 					}
 
@@ -196,7 +355,7 @@ define([
 				}
 
 				// Try prefixed name followed by the unprefixed name
-				hooks = cssHooks[name] || cssHooks[origName]
+				hooks = POE.cssHooks[name] || POE.cssHooks[origName]
 
 				// If a hook was provided get the computed value from there
 				if (hooks && 'get' in hooks) {
@@ -248,5 +407,117 @@ define([
 				}, name, value, arguments.length > 1)
 			},
 		})
+
+
+
+		POE.each(['height', 'width'], function(dimension, i) {
+			POE.cssHooks[dimension] = {
+				get: function(elem, computed, extra) {
+					if (computed) {
+
+						// Certain elements can have dimension info if we invisibly show them
+						// but it must have a current display style that would benefit
+						return rdisplayswap.test(POE.css(elem, 'display')) &&
+
+							(!elem.getClientRects().length || !elem.getBoundingClientRect().width) ?
+							swap(elem, cssShow, function() {
+								return getWidthOrHeight(elem, dimension, extra)
+							}) :
+							getWidthOrHeight(elem, dimension, extra)
+					}
+				},
+
+				set: function(elem, value, extra) {
+					var matches,
+						styles = getStyles(elem),
+
+						// Only read styles.position if the test has a chance to fail
+						// to avoid forcing a reflow.
+						scrollboxSizeBuggy = !POE.support.scrollboxSize() &&
+						styles.position === 'absolute',
+
+						// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-3991)
+						boxSizingNeeded = scrollboxSizeBuggy || extra,
+						isBorderBox = boxSizingNeeded &&
+						POE.css(elem, 'boxSizing', false, styles) === 'border-box',
+						subtract = extra ?
+						boxModelAdjustment(
+							elem,
+							dimension,
+							extra,
+							isBorderBox,
+							styles
+						) :
+						0
+
+					// Account for unreliable border-box dimensions by comparing offset* to computed and
+					// faking a content-box to get border and padding (gh-3699)
+					if (isBorderBox && scrollboxSizeBuggy) {
+						subtract -= Math.ceil(
+							elem['offset' + dimension[0].toUpperCase() + dimension.slice(1)] -
+							parseFloat(styles[dimension]) -
+							boxModelAdjustment(elem, dimension, 'border', false, styles) -
+							0.5
+						)
+					}
+
+					// Convert to pixels if value adjustment is needed
+					if (subtract && (matches = rcssNum.exec(value)) &&
+						(matches[3] || 'px') !== 'px') {
+
+						elem.style[dimension] = value
+						value = POE.css(elem, dimension)
+					}
+
+					return setPositiveNumber(elem, value, subtract)
+				}
+			}
+		})
+
+		POE.cssHooks.marginLeft = addGetHookIf(POE.support.reliableMarginLeft,
+			function(elem, computed) {
+				if (computed) {
+					return (parseFloat(curCSS(elem, 'marginLeft')) ||
+						elem.getBoundingClientRect().left -
+						swap(elem, {
+							marginLeft: 0
+						}, function() {
+							return elem.getBoundingClientRect().left
+						})
+					) + 'px'
+				}
+			}
+		)
+
+		// These hooks are used by animate to expand properties
+		POE.each({
+			margin: '',
+			padding: '',
+			border: 'Width'
+		}, function(suffix, prefix) {
+			POE.cssHooks[prefix + suffix] = {
+				expand: function(value) {
+					var i = 0,
+						expanded = {},
+
+						// Assumes a single number if not a string
+						parts = typeof value === 'string' ? value.split(' ') : [value]
+
+					for (; i < 4; i++) {
+						expanded[prefix + cssExpand[i] + suffix] =
+							parts[i] || parts[i - 2] || parts[0]
+					}
+
+					return expanded
+				}
+			}
+
+			if (prefix !== 'margin') {
+				POE.cssHooks[prefix + suffix].set = setPositiveNumber
+			}
+		})
+
+
+
 		return POE
 	})

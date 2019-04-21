@@ -1,11 +1,14 @@
 define([
 	'./core',
 	'./event/core',
-	'./core/isFunction',
 	'./event/removeEvent',
 	'./event/returnTrue',
 	'./event/returnFalse',
-], function(POE,Event,isFunction,removeEvent,returnTrue,returnFalse) {
+	'./data/dataPriv',
+	'./var/rnothtmlwhite',
+	'./var/rcheckableType',
+	'./var/documentElement',
+], function(POE, Event, removeEvent, returnTrue, returnFalse,dataPriv,rnothtmlwhite,rcheckableType,documentElement) {
 
 	'use strict'
 
@@ -171,6 +174,7 @@ define([
 			})
 		}
 
+	POE.removeEvent = removeEvent
 
 	/*
 	 * Helper functions for managing events -- not part of the public interface.
@@ -498,11 +502,12 @@ define([
 		},
 
 		addProp: function(name, hook) {
+
 			Object.defineProperty(Event.prototype, name, {
 				enumerable: true,
 				configurable: true,
 
-				get: isFunction(hook) ?
+				get: POE.isFunction(hook) ?
 					function() {
 						if (this.originalEvent) {
 							return hook(this.originalEvent)
@@ -601,7 +606,6 @@ define([
 
 
 
-
 	// Includes all common event props including KeyEvent and MouseEvent specific props
 	POE.each({
 		altKey: true,
@@ -662,12 +666,14 @@ define([
 
 			return event.which
 		}
-	}, POE.event.addProp)
+	}, function(v,event){
+		POE.event.addProp(event,true)
+	})
 
 	POE.each({
 		focus: 'focusin',
 		blur: 'focusout'
-	}, function(type, delegateType) {
+	}, function(delegateType,type) {
 		POE.event.special[type] = {
 
 			// Utilize native event if possible so blur/focus sequence is correct
@@ -730,21 +736,6 @@ define([
 		}
 	})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	POE.fn.extend({
 		on: function(types, selector, data, fn) {
 			return on(this, types, selector, data, fn)
@@ -787,8 +778,51 @@ define([
 			return this.each(function() {
 				POE.event.remove(this, types, fn, selector)
 			})
+		},
+
+		hover: function(fnOver, fnOut) {
+			return this.mouseenter(fnOver).mouseleave(fnOut || fnOver)
+		},
+
+		bind: function(types, data, fn) {
+			return this.on(types, null, data, fn)
+		},
+		unbind: function(types, fn) {
+			return this.off(types, null, fn)
+		},
+
+		delegate: function(selector, types, data, fn) {
+			return this.on(types, selector, data, fn)
+		},
+		undelegate: function(selector, types, fn) {
+
+			// ( namespace ) or ( selector, types [, fn] )
+			return arguments.length === 1 ?
+				this.off(selector, '**') :
+				this.off(types, selector || '**', fn)
 		}
 	})
+
+
+
+	POE.each(('blur focus focusin focusout resize scroll click dblclick ' +
+			'mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave ' +
+			'change select submit keydown keypress keyup contextmenu').split(' '),
+		function(name) {
+
+			// Handle event binding
+			POE.fn[name] = function(data, fn) {
+				return arguments.length > 0 ?
+					this.on(name, null, data, fn) :
+					this.trigger(name)
+			}
+		})
+
+
+	
+	
+
+
 
 	POE.Event = Event
 

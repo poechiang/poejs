@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<meta content="always" name="referrer">
+		<meta name="author" content="Poe Chiang">
+		<meta name="generator" content="sublime text">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>项目测试|poejs</title>
+		<link rel="stylesheet" type="text/css" href="../dist/poe.2.0.1.css">
+		<link rel="stylesheet" type="text/css" href="../test/css/main.css">
+		<style type="text/css">
+			.pui-block{
+				font-size: .16rem;
+
+			}
+			input{
+				line-height: .32rem;
+				height: .34rem;
+			}
+		</style>
+    </head>
+	<body>
+		<section class="block1 pui-block">
+			<header class="pui-block-title">POE.http post html</header>
+			<article class="box pui-block-body">
+				请求普通HTML文本并替换当前内容
+			</article>
+			<footer class="pui-block-foot flex-row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >请求内容</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+		<section class="block2 pui-block">
+			<header class="pui-block-title">POE.http post json</header>
+			<article class="box pui-block-body">
+				请求JSON数据：<br><br>
+				名称：<span class="name"></span><br>
+				版本：<span class="version"></span>
+			</article>
+			<footer class="pui-block-foot flex-row row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >请求内容</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+		<section class="block3 pui-block">
+			<header class="pui-block-title">POE.http post json</header>
+			<article class="box pui-block-body">
+				请求JSON数据：<br>
+				名称：<input type="text" class="name" placeholder="js 库名称"><br>
+				版本：<input type="text" class="version" placeholder="版本号"><br>
+				<p class="rlt"></p>
+			</article>
+			<footer class="pui-block-foot flex-row row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >提交内容</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+		<section class="block4 pui-block">
+			<header class="pui-block-title">POE.http post 提交文件</header>
+			<article class="box pui-block-body of-hidden">
+				选择文件后点击【上传】按钮上传文件。<br>
+				上传文件：<input type="file" class="file" multiple><br>
+				<div class="view mv-10"></div>
+
+				<p class="rlt">0%</p>
+			</article>
+			<footer class="pui-block-foot flex-row row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >上传</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+
+
+		<section class="block5 pui-block">
+			<header class="pui-block-title">POE.http session & cookie</header>
+			<article class="box pui-block-body of-hidden">
+				请求JSON数据：<br>
+				名称：<input type="text" class="name" placeholder="js 库名称"><br>
+				版本：<input type="text" class="version" placeholder="版本号"><br>
+				<p class="rlt"></p>
+			</article>
+			<footer class="pui-block-foot flex-row row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >提交内容</button>
+				<button class="btn-block get m-5 success" >获取内容</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+		<section class="block6 pui-block">
+			<header class="pui-block-title">POE.http HTTPS</header>
+			<article class="box pui-block-body of-hidden">
+				请求JSON数据：<br>
+				名称：<input type="text" class="name" placeholder="js 库名称"><br>
+				版本：<input type="text" class="version" placeholder="版本号"><br>
+				<p class="rlt"></p>
+			</article>
+			<footer class="pui-block-foot flex-row row flex-main-end flex-wrap">
+				<button class="btn-block submit m-5 primary" >提交内容</button>
+				<button class="btn-block get m-5 success" >获取内容</button>
+				<button class="btn-block reset m-5" >恢复</button>
+			</footer>
+		</section>
+		<script type="text/javascript" src="../dist/poe.2.0.1.js"></script>
+
+
+		<script type="text/javascript">
+
+			$$('.block1').on('click','.submit,.reset',(e)=>{
+				if($$(e.target).is('.submit')){
+					$$.ui.loading('')
+					var xhr = $$.http.request('http://shi-api.localhost.com/open/poejs/get_html',{
+						type:'html',
+						success:(rlt)=>{
+							$$('.block1 .box').html(rlt)
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block1 .box').html('请求普通HTML文本并替换当前内容')
+				}
+			})
+
+			$$('.block2').on('click','.submit,.reset',(e)=>{
+				if($$(e.target).is('.submit')){
+					$$.ui.loading('')
+					var xhr = $$.http.request('http://shi-api.localhost.com/open/poejs/get_json',{
+						type:'json',
+						success:(rlt)=>{
+							$$('.block2 .box .name').html(rlt.name)
+							$$('.block2 .box .version').html(rlt.version)
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block2 .box .name').html('')
+					$$('.block2 .box .version').html('')
+				}
+			})
+
+			$$('.block3').on('click','.submit,.reset',(e)=>{
+				if($$(e.target).is('.submit')){
+					$$.ui.loading('')
+					var xhr = $$.http.request('http://shi-api.localhost.com/open/poejs/submit_data',{
+						method:'GET',
+						cache:false,
+						type:'json',
+						data:{name:$$('.block3 .name').val(),ver:$$('.block3 .version').val()},
+						success:(rlt)=>{
+							$$('.block3 .rlt').html('您当前使用的库为：'+rlt.name+'，版本号：'+rlt.ver)
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block3 .rlt').html('')
+				}
+			})
+			var files = null
+			$$('.block4').on('change','.file',(e)=>{
+				files = e.target.files
+				var html = ''
+				for(var i=0;i<files.length;i++){
+
+					html+='<img src="'+$$.createObjectURL(files[i])+'" style="border:5px solid #FF9800;margin:5px;" width="100">'
+				}
+				$$('.block4 .view').html(html)
+			})
+			$$('.block4').on('click','.submit,.reset',(e)=>{
+				if($$(e.target).is('.submit')){
+
+		        	var fd = new FormData()
+		        	
+				for(var i=0;i<files.length;i++){
+
+			        fd.append('files[]', files[i])
+		        	}
+					$$.ui.loading('正在上传')
+					$$('.block4 .rlt').html('0%').show()
+					var xhr = $$.http.request('http://shi-api.localhost.com/open/poejs/upload',{
+						data:fd,
+						cache:false,
+						processData:false,
+						contentType:false,
+						ready:(xhr)=>{
+					        xhr.upload.addEventListener("progress", function(e) {  
+							    if (e.lengthComputable) {  
+							        var percentage = Math.round((e.loaded * 100) / e.total);  
+							        $$('.block4 .rlt').html('上传进度:'+percentage+'%')
+							    }  
+							}, false)
+				   
+							xhr.upload.addEventListener("load", function(e){ 
+								console.log(e)
+							}, false)
+						},
+						success:(rlt)=>{
+							var $$imgs = $$('.block4 .view img')
+
+							for(var i=0;i<rlt.data.length;i++){
+								$$imgs.eq(i).attr('src' , rlt.data[i].url).css('border','5px solid green')
+							}
+							//$$('.block4 .view img').attr('src' , rlt.data.url).css('border','5px solid green')
+						},
+						error:(rlt)=>{
+							$$('.block4 .view').css('border','5px solid red')
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block4 .view').html('')
+					file = null
+					$$('.block4 .file').val('')
+					$$('.block4 .rlt').html('上传进度:0%').hide()
+				}
+			})
+
+			$$('.block5').on('click','.submit,.reset,.get',(e)=>{
+				if($$(e.target).is('.submit')){
+					$$.ui.loading('')
+					$$.http.request('http://shi-api.localhost.com/open/poejs/set_session_cookie',{
+						data:{name:$$('.block5 .name').val(),ver:$$('.block5 .version').val()},
+						//crossDomain:true,
+						xhrFields:{withCredentials:true},
+						XMLHttpRequest:true,
+						// ready:(xhr)=>{
+						// 	xhr.withCredentials = true
+						// 	xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+						// },
+						success:(rlt)=>{
+
+							$$.ui.toast('提交成功')
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else if($$(e.target).is('.get')){
+					$$.ui.loading('')
+					$$.http.request('http://shi-api.localhost.com/open/poejs/get_session_cookie',{
+						xhrFields:{withCredentials:true},
+						success:(rlt)=>{
+							$$.ui.toast('获取信息成功')
+							$$('.block5 .rlt').html('您当前使用的库为：'+rlt.name+'，版本号：'+rlt.ver)
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block5 .box .rlt').html('')
+					$$('.block5 .name').val('')
+					ver:$$('.block5 .version').val('')
+				}
+			})
+
+
+			$$('.block6').on('click','.submit,.reset,.get',(e)=>{
+				if($$(e.target).is('.submit')){
+					$$.ui.loading('')
+					$$.http.request('https://api.shibu365.com/open/poejs/set_session_cookie',{
+						data:{name:$$('.block6 .name').val(),ver:$$('.block6 .version').val()},
+						//crossDomain:true,
+						xhrFields:{withCredentials:true},
+						XMLHttpRequest:true,
+						// ready:(xhr)=>{
+						// 	xhr.withCredentials = true
+						// 	xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+						// },
+						success:(rlt)=>{
+
+							$$.ui.toast('提交成功')
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else if($$(e.target).is('.get')){
+					$$.ui.loading('')
+					$$.http.request('https://api.shibu365.com/open/poejs/get_session_cookie',{
+						xhrFields:{withCredentials:true},
+						success:(rlt)=>{
+							$$.ui.toast('获取信息成功')
+							$$('.block6 .rlt').html('您当前使用的库为：'+rlt.name+'，版本号：'+rlt.ver)
+						},
+						complete:()=>{
+							$$.ui.loading()
+						}
+					})
+				}
+				else{
+					$$('.block6 .box .rlt').html('')
+					$$('.block6 .name').val('')
+					$$('.block6 .version').val('')
+				}
+			})
+
+		</script>
+	</body>
+</html>

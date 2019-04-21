@@ -2,7 +2,8 @@ define([
 	'../core',
 '../core/camelCase',
 '../core/acceptData',
-	],function(POE,camelCase,acceptData) {
+'../var/rnothtmlwhite',
+	],function(POE,camelCase,acceptData,rnothtmlwhite) {
 
 	'use strict'
 

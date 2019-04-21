@@ -17,14 +17,16 @@ define([
 		'./data/dataUser',
 		'./core/access',
 		'./core/setGlobalEval',
-		'./core/isFunction',
 		'./core/acceptData',
 		'./core/wrapMap',
 		'./var/rtagName',
-		'./support',
+		'./var/rcheckableType',
+		'./dom/showHide',
+		'./dom/isHiddenWithinTree'
 	],
 	function(POE, nodeName, push, concat, getAll, htmlPrefilter, buildFragment, each, document, rsingleTag, rparentsprev,
-		winnow, filter, sibling, dataPriv, dataUser, access, setGlobalEval, isFunction, acceptData, wrapMap, rtagName, support) {
+		winnow, filter, sibling, dataPriv, dataUser, access, setGlobalEval, acceptData, wrapMap, rtagName, rcheckableType,
+		showHide, isHiddenWithinTree) {
 
 		'use strict'
 
@@ -119,7 +121,7 @@ define([
 				}
 			},
 			disableScript = function(elem) {
-				elem.type = (elem.getAttribute("type") !== null) + "/" + elem.type
+				elem.type = (elem.getAttribute('type') !== null) + '/' + elem.type
 				return elem
 			},
 			domManip = function(collection, args, callback, ignored) {
@@ -132,12 +134,12 @@ define([
 					l = collection.length,
 					iNoClone = l - 1,
 					value = args[0],
-					valueIsFunction = isFunction(value)
+					valueIsFunction = POE.isFunction(value)
 
 				// We can't cloneNode fragments that contain checked, in WebKit
 				if (valueIsFunction ||
 					(l > 1 && typeof value === 'string' &&
-						!support.checkClone && rchecked.test(value))) {
+						!POE.support.checkClone && rchecked.test(value))) {
 					return collection.each(function(index) {
 						var self = collection.eq(index)
 						if (valueIsFunction) {
@@ -259,7 +261,7 @@ define([
 
 				if (!context) {
 
-					if (support.createHTMLDocument) {
+					if (POE.support.createHTMLDocument) {
 						context = document.implementation.createHTMLDocument('')
 
 						base = context.createElement('base')
@@ -297,7 +299,7 @@ define([
 					inPage = POE.contains(elem.ownerDocument, elem)
 
 				// Fix IE cloning issues
-				if (!support.noCloneChecked && (elem.nodeType === 1 || elem.nodeType === 11) &&
+				if (!POE.support.noCloneChecked && (elem.nodeType === 1 || elem.nodeType === 11) &&
 					!POE.isXMLDoc(elem)) {
 
 					// We eschew Sizzle here for performance reasons: https://jsperf.com/getall-vs-sizzle/2
@@ -364,6 +366,95 @@ define([
 							// Assign undefined instead of using delete, see Data#remove
 							elem[dataUser.expando] = undefined
 						}
+					}
+				}
+			},
+
+			valHooks: {
+				option: {
+					get: function(elem) {
+
+						var val = POE.find.attr(elem, 'value')
+						return val != null ?
+							val :
+
+							// Support: IE <=10 - 11 only
+							// option.text throws exceptions (#14686, #14858)
+							// Strip and collapse whitespace
+							// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+							stripAndCollapse(POE.text(elem))
+					}
+				},
+				select: {
+					get: function(elem) {
+						var value, option, i,
+							options = elem.options,
+							index = elem.selectedIndex,
+							one = elem.type === 'select-one',
+							values = one ? null : [],
+							max = one ? index + 1 : options.length
+
+						if (index < 0) {
+							i = max
+
+						} else {
+							i = one ? index : 0
+						}
+
+						// Loop through all the selected options
+						for (; i < max; i++) {
+							option = options[i]
+
+							// Support: IE <=9 only
+							// IE8-9 doesn't update selected after form reset (#2551)
+							if ((option.selected || i === index) &&
+
+								// Don't return options that are disabled or in a disabled optgroup
+								!option.disabled &&
+								(!option.parentNode.disabled ||
+									!nodeName(option.parentNode, 'optgroup'))) {
+
+								// Get the specific value for the option
+								value = POE(option).val()
+
+								// We don't need an array for one selects
+								if (one) {
+									return value
+								}
+
+								// Multi-Selects return an array
+								values.push(value)
+							}
+						}
+
+						return values
+					},
+
+					set: function(elem, value) {
+						var optionSet, option,
+							options = elem.options,
+							values = POE.makeArray(value),
+							i = options.length
+
+						while (i--) {
+							option = options[i]
+
+							/* eslint-disable no-cond-assign */
+
+							if (option.selected =
+								POE.inArray(POE.valHooks.option.get(option), values) > -1
+							) {
+								optionSet = true
+							}
+
+							/* eslint-enable no-cond-assign */
+						}
+
+						// Force browsers to behave consistently when non-matching value is set
+						if (!optionSet) {
+							elem.selectedIndex = -1
+						}
+						return values
 					}
 				}
 			}
@@ -654,6 +745,160 @@ define([
 
 					// Force callback invocation
 				}, ignored)
+			},
+
+
+			wrapAll: function(html) {
+				var wrap
+
+				if (this[0]) {
+					if (POE.isFunction(html)) {
+						html = html.call(this[0])
+					}
+
+					// The elements to wrap the target around
+					wrap = POE(html, this[0].ownerDocument).eq(0).clone(true)
+
+					if (this[0].parentNode) {
+						wrap.insertBefore(this[0])
+					}
+
+					wrap.map(function() {
+						var elem = this
+
+						while (elem.firstElementChild) {
+							elem = elem.firstElementChild
+						}
+
+						return elem
+					}).append(this)
+				}
+
+				return this
+			},
+
+			wrapInner: function(html) {
+				if (POE.isFunction(html)) {
+					return this.each(function(ele) {
+						POE(this).wrapInner(html.call(this, ele))
+					})
+				}
+
+				return this.each(function() {
+					var self = POE(this),
+						contents = self.contents()
+
+					if (contents.length) {
+						contents.wrapAll(html)
+
+					} else {
+						self.append(html)
+					}
+				})
+			},
+
+			wrap: function(html) {
+				var htmlIsFunction = POE.isFunction(html)
+
+				return this.each(function(ele) {
+					POE(this).wrapAll(htmlIsFunction ? html.call(this, ele) : html)
+				})
+			},
+
+			unwrap: function(selector) {
+				this.parent(selector).not('body').each(function() {
+					POE(this).replaceWith(this.childNodes)
+				})
+				return this
+			},
+
+
+			val: function(value) {
+				var hooks, ret, valueIsFunction,
+					elem = this[0]
+
+				if (!arguments.length) {
+					if (elem) {
+						hooks = POE.valHooks[elem.type] ||
+							POE.valHooks[elem.nodeName.toLowerCase()]
+
+						if (hooks &&
+							'get' in hooks &&
+							(ret = hooks.get(elem, 'value')) !== undefined
+						) {
+							return ret
+						}
+
+						ret = elem.value
+
+						// Handle most common string cases
+						if (typeof ret === 'string') {
+							return ret.replace(/\r/g, '')
+						}
+
+						// Handle cases where value is null/undef or number
+						return ret == null ? '' : ret
+					}
+
+					return
+				}
+
+				valueIsFunction = POE.isFunction(value)
+
+				return this.each(function(_, i) {
+					var val
+
+					if (this.nodeType !== 1) {
+						return
+					}
+
+					if (valueIsFunction) {
+						val = value.call(this, i, POE(this).val())
+					} else {
+						val = value
+					}
+
+					// Treat null/undefined as ''; convert numbers to string
+					if (val == null) {
+						val = ''
+
+					} else if (typeof val === 'number') {
+						val += ''
+
+					} else if (Array.isArray(val)) {
+						val = POE.map(val, function(value) {
+							return value == null ? '' : value + ''
+						})
+					}
+
+					hooks = POE.valHooks[this.type] || POE.valHooks[this.nodeName.toLowerCase()]
+
+					// If set returns undefined, fall back to normal setting
+					if (!hooks || !('set' in hooks) || hooks.set(this, val, 'value') === undefined) {
+						this.value = val
+					}
+				})
+			},
+
+
+			show: function() {
+				return showHide(this, true);
+			},
+			hide: function() {
+				return showHide(this);
+			},
+			toggle: function(state) {
+				if (typeof state === 'boolean') {
+					return state ? this.show() : this.hide();
+				}
+
+				return this.each(function() {
+					if (isHiddenWithinTree(this)) {
+						POE(this).show();
+					} else {
+						POE(this).hide();
+					}
+				});
 			}
 		})
 
@@ -760,6 +1005,24 @@ define([
 				return this.pushStack(ret)
 			}
 		})
+
+
+		each(['radio', 'checkbox'], function() {
+			POE.valHooks[this] = {
+				set: function(elem, value) {
+					if (Array.isArray(value)) {
+						return (elem.checked = POE.inArray(POE(elem).val(), value) > -1)
+					}
+				}
+			}
+			if (!support.checkOn) {
+				POE.valHooks[this].get = function(elem) {
+					return elem.getAttribute('value') === null ? 'on' : elem.value
+				}
+			}
+		})
+
+
 
 		return POE
 	})

@@ -16,6 +16,9 @@ define(function(){
 		if (options.type) {
 			_class_ += ' '+options.type
 		}
+		if (options.movable) {
+			_class_ += ' movable'
+		}
 
 		return _class_
 	}

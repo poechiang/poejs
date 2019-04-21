@@ -1,5 +1,7 @@
 define([
 	'./var/arr',
+	'./var/expando',
+	'./var/version',
 	'./var/document',
 	'./var/rsingleTag',
 	'./core/inArray',
@@ -16,25 +18,22 @@ define([
 	'./core/map',
 	'./core/grep',
 	'./core/slice',
-	'./core/push'
-], function(arr, document, rsingleTag, inArray, extend, class2type, isFunction, isWindow, toType, 
-	isArrayLike, isPlainObject, each, merge,makeArray, map, grep,slice,push) {
+	'./core/push',
+	'./dom/var/cssHooks',
+	'./dom/var/cssNumber',
+], function(arr, expando,version, document, rsingleTag, inArray, extend, class2type, isFunction, isWindow, toType,
+	isArrayLike, isPlainObject, each, merge, makeArray, map, grep, slice, push,cssHooks, cssNumber) {
 
 	'use strict'
 
 	var rootPOE,
-		version = '2.0.1',
 		init,
 		POE = function(selector, context) {
 			return new POE.fn.init(selector, context)
 		},
 		rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g
 
-	POE.expando = 'POE' + (version + Math.random()).replace(/\D/g, '')
-
 	POE.extend = extend
-	
-	POE.isReady = true
 
 	POE.fn = POE.prototype = {
 
@@ -52,26 +51,31 @@ define([
 	POE.extend({
 		// A global GUID counter for objects
 		guid: 1,
+		expando:expando,
+		isReady:true,
 		noop: function() {},
 
 		each: each,
-		makeArray:makeArray,
+		makeArray: makeArray,
 		inArray: inArray,
 		merge: merge,
 		grep: grep,
 		map: map,
-		
-		delay:function(fn,delay,args,context){
-			if (delay===undefined) {
-				fn.apply(context,POE.toArray(args))
-			}
-			else{
-				setTimeout(function(){
-					fn.apply(context,POE.toArray(args))
-				},delay||0)
+
+
+		cssHooks: cssHooks,
+		cssNumber: cssNumber,
+
+		delay: function(fn, delay, args, context) {
+			if (delay === undefined) {
+				fn.apply(context, POE.toArray(args))
+			} else {
+				setTimeout(function() {
+					fn.apply(context, POE.toArray(args))
+				}, delay || 0)
 			}
 		},
-		eval:function(code, node, doc) {
+		eval: function(code, node, doc) {
 			doc = doc || document
 
 			var script = doc.createElement('script')
@@ -79,14 +83,14 @@ define([
 			script.text = code
 
 			if (node) {
-				each(['type','src','nonce','noModule'],function(item){
+				each(['type', 'src', 'nonce', 'noModule'], function(item) {
 					var val = node[item] || node.getAttribute && node.getAttribute(item)
 					if (val) {
 						script.setAttribute(item, val)
 					}
 				})
 			}
-			
+
 			doc.head.appendChild(script).parentNode.removeChild(script)
 		},
 		trim: function(text) {
@@ -94,13 +98,12 @@ define([
 				'' :
 				(text + '').replace(rtrim, '')
 		},
-		toArray:function(obj){
+		toArray: function(obj) {
 			if (isArrayLike(obj)) {
 				return [].slice.call(obj)
-			}
-			else{
+			} else {
 				var arr = []
-				for(var x in obj){
+				for (var x in obj) {
 					if (isFunction(obj[x])) {
 						continue
 					}
@@ -108,9 +111,34 @@ define([
 				}
 				return arr
 			}
-		}
-	})
+		},
+		proxy: function(fn, context) {
+			var tmp, args, proxy
 
+			if (typeof context === 'string') {
+				tmp = fn[context]
+				context = fn
+				fn = tmp
+			}
+
+			// Quick check to determine if target is callable, in the spec
+			// this throws a TypeError, but we will just return undefined.
+			if (!isFunction(fn)) {
+				return undefined
+			}
+
+			// Simulated bind
+			args = slice.call(arguments, 2)
+			proxy = function() {
+				return fn.apply(context || this, args.concat(slice.call(arguments)))
+			}
+
+			// Set the guid of unique handler to the same of original handler, so it can be removed
+			proxy.guid = fn.guid = fn.guid || POE.guid++
+
+				return proxy
+		},
+	})
 	init = POE.fn.init = function(selector, context, root) {
 		var match, elem
 
@@ -240,4 +268,4 @@ define([
 	}
 	rootPOE = POE(document)
 	return POE
-});
+})

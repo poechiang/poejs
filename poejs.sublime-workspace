@@ -1,0 +1,1365 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sho",
+				"showHide"
+			],
+			[
+				"d",
+				"not-allowed\tcursor"
+			],
+			[
+				"rem",
+				"remark-list"
+			],
+			[
+				"send",
+				"send_remark"
+			],
+			[
+				"st",
+				"state"
+			],
+			[
+				"block",
+				"block3"
+			],
+			[
+				"handl",
+				"handleExpressAdd"
+			],
+			[
+				"exp",
+				"expresses"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"resp",
+				"response"
+			],
+			[
+				"res",
+				"respHeader"
+			],
+			[
+				"con",
+				"convert"
+			],
+			[
+				"parse",
+				"parseXML"
+			],
+			[
+				"ar",
+				"arguments"
+			],
+			[
+				"prot",
+				"protocol"
+			],
+			[
+				"ins",
+				"instanceof"
+			],
+			[
+				"ori",
+				"originalEvent"
+			],
+			[
+				"warn",
+				"warning"
+			],
+			[
+				"docu",
+				"documentElement"
+			],
+			[
+				"add",
+				"addGetHookIf"
+			],
+			[
+				"supp",
+				"support"
+			],
+			[
+				"rche",
+				"rcheckableType"
+			],
+			[
+				"current",
+				"current_index"
+			],
+			[
+				"ab",
+				"abort"
+			],
+			[
+				"wr",
+				"wrapMap"
+			],
+			[
+				"mo",
+				"modalHTML"
+			],
+			[
+				"de",
+				"_def_"
+			],
+			[
+				"_",
+				"_def_"
+			],
+			[
+				"optio",
+				"options2class"
+			],
+			[
+				"__",
+				"_class_"
+			],
+			[
+				"show",
+				"showUI"
+			],
+			[
+				"hid",
+				"hideUI"
+			],
+			[
+				"toa",
+				"toastHTML"
+			],
+			[
+				"app",
+				"applyOption"
+			],
+			[
+				"curr",
+				"currentIndex"
+			],
+			[
+				"no",
+				"notifyHTML"
+			],
+			[
+				"load",
+				"loadingHTML"
+			],
+			[
+				"lo",
+				"loadingHTML"
+			],
+			[
+				"prod",
+				"PRODUCT"
+			],
+			[
+				"acc",
+				"ACCESS_KEY_SECRET"
+			],
+			[
+				"html",
+				"htmlspecialchars_decode"
+			],
+			[
+				"htmlen",
+				"html_entity_decode"
+			],
+			[
+				"mt",
+				"mt_rand"
+			],
+			[
+				"random",
+				"random_int"
+			],
+			[
+				"func",
+				"function_exists"
+			],
+			[
+				"rand",
+				"random_int"
+			],
+			[
+				"acce",
+				"ACCESS_KEY_ID"
+			],
+			[
+				"get",
+				"getAll"
+			],
+			[
+				"bo",
+				"boxpoe"
+			],
+			[
+				"logo",
+				"logo_qr_height"
+			],
+			[
+				"filepu",
+				"file_put_contents"
+			],
+			[
+				"log",
+				"logo_qr_height"
+			],
+			[
+				"exist",
+				"file_exists"
+			],
+			[
+				"ctor",
+				"_constructor"
+			],
+			[
+				"box",
+				"box-count"
+			],
+			[
+				"si",
+				"nesw-resize\tcursor"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"isA",
+				"is_array"
+			],
+			[
+				"isa",
+				"is_array"
+			],
+			[
+				"isnu",
+				"is_numeric"
+			],
+			[
+				"cal",
+				"cancel"
+			],
+			[
+				"ass",
+				"assist"
+			],
+			[
+				"assis",
+				"assistTypes"
+			],
+			[
+				"set",
+				"settings"
+			],
+			[
+				"stri",
+				"stripAndCollapse"
+			],
+			[
+				"str",
+				"stripAndCollapse"
+			],
+			[
+				"fin",
+				"finalPropName"
+			],
+			[
+				"css",
+				"cssProps"
+			],
+			[
+				"timeLo",
+				"timeLogs"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"s",
+				"support"
+			],
+			[
+				"h",
+				"hasOwn"
+			],
+			[
+				"index",
+				"indexOf"
+			],
+			[
+				"do",
+				"DOMEval"
+			],
+			[
+				"ml",
+				"ml-item"
+			],
+			[
+				"mak",
+				"makeArray"
+			],
+			[
+				"mess",
+				"messageFormat"
+			],
+			[
+				"obje",
+				"ObjectFunctionString"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"fn",
+				"fnToString"
+			],
+			[
+				"has",
+				"hasOwnProperty"
+			],
+			[
+				"strrep",
+				"str_replace"
+			],
+			[
+				"（）",
+				"（可选）视频所属话题名称"
+			],
+			[
+				"频大",
+				"频大师"
+			],
+			[
+				"Temp",
+				"TemplateParam"
+			],
+			[
+				"vali",
+				"validation"
+			],
+			[
+				"scr",
+				"scrollHeight"
+			],
+			[
+				"scro",
+				"scrollTop"
+			],
+			[
+				"cont",
+				"container"
+			],
+			[
+				"mem",
+				"members"
+			],
+			[
+				"sock",
+				"socket"
+			],
+			[
+				"ser",
+				"servers"
+			],
+			[
+				"sess",
+				"session"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"change",
+				"changePhoto"
+			],
+			[
+				"flex",
+				"flex-item"
+			],
+			[
+				"q",
+				"mQueue"
+			],
+			[
+				"ch",
+				"checkin-pnl"
+			],
+			[
+				"se",
+				"section"
+			],
+			[
+				"member",
+				"member-list"
+			],
+			[
+				"focu",
+				"focusEmoji"
+			],
+			[
+				"em",
+				"showEmoji"
+			],
+			[
+				"dis",
+				"disabled"
+			],
+			[
+				"over",
+				"overflow\tproperty"
+			],
+			[
+				"tran",
+				"transition\tproperty"
+			],
+			[
+				"swi",
+				"swiper-pagination"
+			],
+			[
+				"sw",
+				"swiper-container"
+			],
+			[
+				"pag",
+				"paginate"
+			],
+			[
+				"qu",
+				"quillEditor"
+			],
+			[
+				"htm",
+				"htmlspecialchars_decode"
+			],
+			[
+				"han",
+				"handleScroll"
+			],
+			[
+				"repl",
+				"replace"
+			],
+			[
+				"jso",
+				"JSON"
+			],
+			[
+				"so",
+				"socket"
+			],
+			[
+				"me",
+				"message"
+			],
+			[
+				"soc",
+				"sockets"
+			],
+			[
+				"repla",
+				"replaceAll"
+			],
+			[
+				"const",
+				"constructor"
+			],
+			[
+				"bef",
+				"beforeQuery"
+			],
+			[
+				"par",
+				"parseOrder"
+			],
+			[
+				"conn",
+				"connect"
+			],
+			[
+				"Data",
+				"DateBase"
+			],
+			[
+				"wx",
+				"wx_nick"
+			],
+			[
+				"cus",
+				"cust_nick"
+			],
+			[
+				"js",
+				"JSON"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"uni",
+				"union"
+			],
+			[
+				"op",
+				"options"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "test/index.html",
+			"settings":
+			{
+				"buffer_size": 6422,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dom.js",
+			"settings":
+			{
+				"buffer_size": 24533,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dom/showHide.js",
+			"settings":
+			{
+				"buffer_size": 1815,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "jq.js",
+			"settings":
+			{
+				"buffer_size": 279859,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dom/isHiddenWithinTree.js",
+			"settings":
+			{
+				"buffer_size": 589,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "define(function(){"
+			}
+		},
+		{
+			"contents": "Searching 107 files for \"adjustCss\" (case sensitive)\n\n0 matches",
+			"settings":
+			{
+				"buffer_size": 63,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 137.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gitp",
+				"Git: Push"
+			],
+			[
+				"gitc",
+				"Git: Commit"
+			],
+			[
+				"gitad",
+				"Git: Quick Add"
+			],
+			[
+				"gita",
+				"Git: Quick Add"
+			],
+			[
+				"gitig",
+				"Set Syntax: Git Ignore"
+			],
+			[
+				"gitst",
+				"Git: Apply Stash"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"gitpu",
+				"Git: Push Current Branch"
+			],
+			[
+				"gitco",
+				"Git: Commit"
+			],
+			[
+				"gitadd",
+				"Git: Quick Add"
+			],
+			[
+				"packagecontrol:inst",
+				"Package Control: Install Package"
+			],
+			[
+				"gitpus",
+				"Git: Push Current Branch"
+			],
+			[
+				"gitq",
+				"Git: Quick Add"
+			],
+			[
+				"git:push",
+				"Git: Push"
+			],
+			[
+				"git:pull",
+				"Git: Pull Current Branch"
+			],
+			[
+				"git:com",
+				"Git: Commit"
+			],
+			[
+				"git:pus",
+				"Git: Push Current Branch"
+			],
+			[
+				"git:m",
+				"Git: Merge"
+			],
+			[
+				"gitfetch",
+				"Git: Fetch"
+			],
+			[
+				"gitremo",
+				"Git: Add Remote"
+			],
+			[
+				"gitcom",
+				"Git: Commit"
+			],
+			[
+				"gitini",
+				"Git: Init"
+			],
+			[
+				"git push",
+				"Git: Push Current Branch"
+			],
+			[
+				"git pu",
+				"Git: Push Current Branch"
+			],
+			[
+				"git init",
+				"Git: Init"
+			],
+			[
+				"git add",
+				"Git: Quick Add"
+			],
+			[
+				"gitadd\\",
+				"Git: Quick Add"
+			],
+			[
+				"git:add",
+				"Git: Add Remote"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"gitcomm",
+				"Git: Commit"
+			],
+			[
+				"git in",
+				"Git: Init"
+			],
+			[
+				"npm run ",
+				"npm: Run Script"
+			],
+			[
+				"npm",
+				"npm: Run Script"
+			],
+			[
+				"npm run",
+				"npm: Run Script"
+			],
+			[
+				"npmru",
+				"npm: Run Script"
+			],
+			[
+				"npmr",
+				"npm: Run Script"
+			],
+			[
+				"npmruns",
+				"npm: Run Script"
+			],
+			[
+				"npm run s",
+				"npm: Run Script"
+			],
+			[
+				"npm run script",
+				"npm: Run Script"
+			],
+			[
+				"Snippet: ",
+				"Snippet: return"
+			],
+			[
+				"npm ruin ",
+				"npm: Run Script"
+			],
+			[
+				"",
+				"Build: Cancel"
+			],
+			[
+				"npmrun",
+				"npm: Run Script"
+			],
+			[
+				"NPM RUN",
+				"npm: Run Script"
+			],
+			[
+				"npm:r",
+				"npm: Run Script"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: un",
+				"Package Control: List Unmanaged Packages"
+			],
+			[
+				"uninstall",
+				"npm: Remove/Uninstall Package"
+			],
+			[
+				"npm install",
+				"npm: Install and Save Package"
+			],
+			[
+				"npm ",
+				"npm: Run Tests"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: installpa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"comm",
+				"Git: Commit"
+			],
+			[
+				"git:co",
+				"Git: Commit"
+			],
+			[
+				"git:pcb",
+				"Git: Push Current Branch"
+			],
+			[
+				"git:commit",
+				"Git: Commit"
+			],
+			[
+				"git:addcurrentfile",
+				"Git: Add Current File"
+			],
+			[
+				"git:remote",
+				"Git: Remote"
+			],
+			[
+				"git:quickstatus",
+				"Git: Quick Status"
+			],
+			[
+				"git:status",
+				"Git: Quick Status"
+			],
+			[
+				"git:quick status",
+				"Git: Quick Status"
+			],
+			[
+				"git:init",
+				"Git: Init"
+			],
+			[
+				"git:st",
+				"Git: Status"
+			],
+			[
+				"git:ver",
+				"Git: Version"
+			],
+			[
+				"git:",
+				"Plugin Development: Profile Events"
+			]
+		],
+		"width": 412.0
+	},
+	"console":
+	{
+		"height": 200.0,
+		"history":
+		[
+			"git:pull -f --all",
+			"git pull -f --all",
+			"Xasc"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/PoeCh/poejs"
+	],
+	"file_history":
+	[
+		"/E/PoeCh/poejs/src/dom/showHide.js",
+		"/E/PoeCh/poejs/src/dom/isAttached.js",
+		"/E/PoeCh/poejs/src/isAttached.js",
+		"/F/Users/PoeCh/Desktop/shibu.bat",
+		"/F/Users/PoeCh/Desktop/api.bat",
+		"/F/Users/PoeCh/Desktop/back.bat",
+		"/F/Users/PoeCh/Desktop/shi-cloud.sublime-project",
+		"/F/Users/PoeCh/Desktop/poejs.bat",
+		"/E/PoeCh/poejs/poejs.bat",
+		"/F/Users/PoeCh/Desktop/poejs.bat.lnk",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/convert.js",
+		"/F/Users/PoeCh/Desktop/poejs/test/index.html",
+		"/F/Users/PoeCh/Desktop/poejs/src/http.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/send.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/core.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/dom.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/event.js",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/open/controller/Poejs.php",
+		"/F/Users/PoeCh/Desktop/poejs/src/scss/class.scss",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/var/settings.js",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/open/controller/Index.php",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/open.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/var/allTypes.js",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/shop/order/list.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/shop/order/edit.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/model/Order.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/ShopOrder.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/back/controller/Order.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/back/controller/Index.php",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/tip.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/DbService.php",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/menu.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/index.html",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/assets/css/global.scss",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/banner/edit.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/banner/list.vue",
+		"/F/Users/PoeCh/Desktop/poejs/jq.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/transport.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/prop.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/support.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/poe.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/expando.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/data/core.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/dom/filter.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/prefilters.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/addToPrefiltersOrTransports.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/param.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/var/parseXML.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/console.js",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/open/common/Module.php",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/var/xhr.js",
+		"/F/Users/PoeCh/Desktop/poejs/test/css/main.css",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/done.js",
+		"/F/Users/PoeCh/Desktop/poejs/test/ui.html",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/controller/App.php",
+		"/F/Users/PoeCh/Desktop/poejs/src/scss/ui.scss",
+		"/F/Users/PoeCh/Desktop/poejs/src/http/buildParams.js",
+		"/F/Users/PoeCh/Desktop/poejs/node_modules/@babel/generator/node_modules/lodash/lodash.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/sizzle.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/event/core.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/parseOptions.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/attr.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/class.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/css.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/support.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/version.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/documentElement.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/dom/addGetHookIf.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/_def_.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/rcheckableType.js",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/good/list.vue",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/options2class.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/tpl/modalHTML.js",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/td_status.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/cashier/controller/Wxpay.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/cst/controller/Order.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/cst/controller/Notify.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/cst/controller/Good.php",
+		"/F/Users/PoeCh/Documents/www/shibu/back/static/css/theme.css",
+		"/F/Users/PoeCh/Documents/www/shibu/back/dist/static/css/app.7c5edb7e8070369bd3dfca24054f67d0.css",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/tpl/toastHTML.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/tpl/loadingHTML.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/data.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/wrapMap.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/buildFragment.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/rtagName.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/tpl/notifyHTML.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/type.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/type/array.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/_cache_.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/ui/tpl/parseOptions.js",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/switch.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/filter-list.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/pages/good/good.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/cst/controller/User.php",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/field.vue",
+		"/F/Users/PoeCh/Documents/www/shibu/back/src/components/tags-editor.vue",
+		"/F/Users/PoeCh/Documents/www/poe/src/poe.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/type/date.js",
+		"/F/Users/PoeCh/Documents/www/poe/src/var/arr.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/type/string.js",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/Service.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/User.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/extend/poe/alibaba/AliCloud.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/Resp.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/application/common/service/AliCloud.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/extend/poe/facade/AliCloud.php",
+		"/F/Users/PoeCh/Documents/www/shibu/api/extend/alibaba/AliCloud.php",
+		"/F/Users/PoeCh/Documents/www/shibu/back/back.bat",
+		"/F/Users/PoeCh/Desktop/poejs/poejs.bat",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/acceptData.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/slice.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/push.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/nodeName.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/inArray.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/indexOf.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/concat.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/var/rsingleTag.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/extend.js",
+		"/F/Users/PoeCh/Documents/www/shibu/api/extend/poe/WxHelper.php",
+		"/C/Program Files/nodejs/nodevars.bat",
+		"/F/Users/PoeCh/Desktop/poejs/.gitignore",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/stripAndCollapse.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/data/dataPriv.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/data/dataUser.js",
+		"/F/Users/PoeCh/Desktop/poejs/src/core/setGlobalEval.js"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 352.0,
+		"where_history":
+		[
+			"E:\\PoeCh\\poejs\\src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"showHide",
+			"\"",
+			";",
+			"jQuery",
+			"isHiddenWithinTree",
+			"defaultPrefilter",
+			"isHiddenWithinTree",
+			";",
+			"\"",
+			"jQuery",
+			"adjustCSS",
+			"getDefaultDisplay",
+			"showHide",
+			"adjustCss",
+			"show"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"'",
+			"",
+			"POE",
+			"",
+			"'",
+			"POE"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6391,
+								6391
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dom.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								472,
+								480
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 246.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/dom/showHide.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1815,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								93,
+								93
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 330.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "jq.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 279859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								120017,
+								120972
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 98630.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/dom/isHiddenWithinTree.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 589,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								13
+							]
+						],
+						"settings":
+						{
+							"auto_name": "define(function(){",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 72.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/SASS Build/SASS.sublime-build",
+	"project": "poejs.sublime-project",
+	"replace":
+	{
+		"height": 79.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"npm run dev",
+				"sosc\\res\\node_modules\\postcss-discard-unused\\node_modules\\postcss\\lib\\previous-map.js"
+			],
+			[
+				"install",
+				"Core\\Library\\Vendor\\phpqrcode\\INSTALL"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 187.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

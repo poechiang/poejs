@@ -101,7 +101,7 @@ define([
 	// when in an optgroup
 	// eslint rule 'no-unused-expressions' is disabled for this code
 	// since it considers such accessions noop
-	if (!support.optSelected) {
+	if (!POE.support.optSelected) {
 		POE.propHooks.selected = {
 			get: function(elem) {
 

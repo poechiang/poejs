@@ -1,7 +1,6 @@
 define([
-	'../../external/sizzle',
-	'../core/grep'
-], function(sizzle, grep) {
+	'../core/grep',
+], function(grep) {
 	'use strict'
 
 	return function(expr, elems, not) {
@@ -12,10 +11,10 @@ define([
 		}
 
 		if (elems.length === 1 && elem.nodeType === 1) {
-			return sizzle.matchesSelector(elem, expr) ? [elem] : []
+			return POE.matchesSelector(elem, expr) ? [elem] : []
 		}
 
-		return sizzle.matches(expr, grep(elems, function(elem) {
+		return POE.matches(expr, grep(elems, function(elem) {
 			return elem.nodeType === 1
 		}))
 	}
